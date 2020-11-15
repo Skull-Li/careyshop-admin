@@ -118,7 +118,7 @@
           </div>
 
           <div class="careyshop cs-tc cs-pt-10">
-            <span>温州瑞令网络科技有限公司 版权所有</span>
+            <span>宁波互明科技有限公司 提供技术支持</span>
           </div>
         </div>
 
