@@ -118,7 +118,7 @@
           </div>
 
           <div class="careyshop cs-tc cs-pt-10">
-            <span>宁波互明科技有限公司 提供技术支持</span>
+            <span>宁波互明科技有限公司 技术支持</span>
           </div>
         </div>
 
