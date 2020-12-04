@@ -1,5 +1,5 @@
 var serverConfig = {
-  BASE_API: '//careyshop.oruei.com/api',
-  APP_KEY: '43851429',
-  APP_SECRET: '9ee892d3089ab3d01fb936374d3a1122'
+  BASE_API: '/api',
+  APP_KEY: '86757125',
+  APP_SECRET: 'ea1bd533d001fd73b09944f04c96a6fc'
 }
