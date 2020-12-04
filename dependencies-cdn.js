@@ -20,7 +20,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'vuex',
       library: 'Vuex',
-      js: 'https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/vuex@3.6.0/dist/vuex.min.js',
       css: ''
     },
     {
@@ -32,7 +32,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'better-scroll',
       library: 'BetterScroll',
-      js: 'https://cdn.jsdelivr.net/npm/better-scroll@2.0.5/dist/better-scroll.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/better-scroll@2.0.6/dist/better-scroll.min.js',
       css: ''
     },
     {
@@ -116,7 +116,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'echarts',
       library: 'echarts',
-      js: 'https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/echarts@5.0.0/dist/echarts.min.js',
       css: ''
     },
     {
