@@ -116,7 +116,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'echarts',
       library: 'echarts',
-      js: 'https://cdn.jsdelivr.net/npm/echarts@5.0.0/dist/echarts.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js',
       css: ''
     },
     {
