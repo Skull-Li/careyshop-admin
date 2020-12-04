@@ -46,15 +46,15 @@ export default {
         preview: 'image/theme/careyshop/preview@2x.png'
       },
       {
+        title: '简洁',
+        name: 'concise',
+        preview: 'image/theme/concise/preview@2x.png'
+      },
+      {
         title: '线条',
         name: 'line',
         backgroundImage: 'image/theme/line/bg.jpg',
         preview: 'image/theme/line/preview@2x.png'
-      },
-      {
-        title: '深灰',
-        name: 'gray',
-        preview: 'image/theme/gray/preview@2x.png'
       },
       {
         title: '海岸',
@@ -76,6 +76,6 @@ export default {
       }
     ],
     // 默认主题
-    default: 'gray'
+    default: 'careyshop'
   }
 }

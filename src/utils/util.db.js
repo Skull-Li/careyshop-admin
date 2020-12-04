@@ -31,7 +31,7 @@ export function pathInit({
   validator = () => true,
   defaultValue = ''
 }) {
-  const uuid = util.cookies.get('uuid') || 'ghost-uuid'
+  const uuid = util.cookies.get('uuid') || '\x43\x61\x72\x65\x79\x53\x68\x6f\x70'
   const currentPath = `${dbName}.${user ? `user.${uuid}` : 'public'}${path ? `.${path}` : ''}`
   const value = db.get(currentPath).value()
   if (!(value !== undefined && validator(value))) {
