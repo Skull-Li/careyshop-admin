@@ -46,7 +46,7 @@
     "@vue/cli-plugin-unit-jest": "^4.5.9",
     "@vue/cli-plugin-vuex": "^4.5.9",
     "@vue/cli-service": "^4.5.9",
-    "@vue/eslint-config-standard": "^5.1.2",
+    "@vue/eslint-config-standard": "^6.0.0",
     "@vue/test-utils": "^1.1.1",
     "babel-eslint": "^10.1.0",
     "compression-webpack-plugin": "^7.0.0",
