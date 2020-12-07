@@ -280,9 +280,7 @@ export default {
     filterDelivery(val) {
       if (val) {
         this.companyList = this.companyCopy.filter(item => {
-          if (!!~item.name.indexOf(val) || !!~item.phonetic.toLowerCase().indexOf(val.toLowerCase())) {
-            return true
-          }
+          return !!~item.name.indexOf(val) || !!~item.phonetic.toLowerCase().indexOf(val.toLowerCase())
         })
       } else {
         this.companyList = this.companyCopy
