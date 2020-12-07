@@ -44,7 +44,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'dayjs',
       library: 'dayjs',
-      js: 'https://cdn.jsdelivr.net/npm/dayjs@1.9.6/dayjs.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/dayjs@1.9.7/dayjs.min.js',
       css: ''
     },
     {
@@ -128,13 +128,13 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: '@careyshop/vue-print',
       library: 'PrintCS',
-      js: 'https://cdn.jsdelivr.net/npm/@careyshop/vue-print@1.0.8/dist/print.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/@careyshop/vue-print@1.0.14/dist/print.min.js',
       css: ''
     },
     {
       name: '@careyshop/vue-table-export',
       library: 'VueTableExport',
-      js: 'https://cdn.jsdelivr.net/npm/@careyshop/vue-table-export@1.0.17/dist/export.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/@careyshop/vue-table-export@1.0.18/dist/export.min.js',
       css: ''
     }
   ]
