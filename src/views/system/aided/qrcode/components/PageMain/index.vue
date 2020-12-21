@@ -611,7 +611,7 @@ export default {
       this.qrcodeData = {
         name: data.name,
         text: data.text,
-        url: this.qrcodeUrl + `&qrcode_id=${data.qrcode_id}`
+        url: this.qrcodeUrl + `?qrcode_id=${data.qrcode_id}`
       }
 
       this.dialogQrcodeVisible = true
