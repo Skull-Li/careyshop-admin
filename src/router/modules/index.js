@@ -20,6 +20,12 @@ export default {
       meta: { title: '权限不足', auth: true },
       component: () => import('@/views/public/401')
     },
+    {
+      path: '50*',
+      name: 'page500',
+      meta: { title: '异常错误' },
+      component: () => import('@/views/public/50x')
+    },
     // 系统 前端日志
     {
       path: 'log',
