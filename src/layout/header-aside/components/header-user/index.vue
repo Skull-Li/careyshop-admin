@@ -379,7 +379,12 @@ export default {
       getSettingList('system_info', ['open_api_rest'])
         .then(res => {
           if (res.data.open_api_rest.value) {
-            this.$open(this.$baseConfig.BASE_API)
+            let url = this.$baseConfig.BASE_API
+            if (url.slice(0, 1) === '/' && url.slice(1, 1) !== '/') {
+              url = '//' + document.domain + url
+            }
+
+            this.$open(url)
           } else {
             this.$message.warning('"Rest API调试"已关闭')
           }
