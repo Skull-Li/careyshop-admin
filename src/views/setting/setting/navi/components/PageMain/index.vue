@@ -51,12 +51,33 @@
         prop="name"
         min-width="80"
         sortable="custom">
+        <template slot-scope="scope">
+          <el-popover
+            v-if="scope.row.image"
+            width="150"
+            placement="right"
+            trigger="hover">
+            <div class="popover-image">
+              <el-image
+                :src="scope.row.image | getPreviewUrl"
+                @click.stop="$preview(scope.row.image)"
+                fit="fill"/>
+            </div>
+            <i slot="reference" class="el-icon-picture cs-pr-5"/>
+          </el-popover>
+          <span>{{scope.row.name}}</span>
+        </template>
       </el-table-column>
 
       <el-table-column
         label="URL"
         prop="url"
         min-width="200">
+      </el-table-column>
+
+      <el-table-column
+        label="图标"
+        prop="icon">
       </el-table-column>
 
       <el-table-column
@@ -158,13 +179,64 @@
         </el-form-item>
 
         <el-form-item
-          label="打开方式"
-          prop="target">
-          <el-radio-group v-model="form.target">
-            <el-radio label="_self">当前窗口</el-radio>
-            <el-radio label="_blank">新窗口</el-radio>
-          </el-radio-group>
+          label="图片"
+          prop="image">
+          <el-input
+            v-model="form.image"
+            placeholder="可输入导航图片"
+            :clearable="true">
+            <template slot="prepend">
+              <el-popover
+                v-if="form.image"
+                width="150"
+                placement="top"
+                trigger="hover">
+                <div class="popover-image">
+                  <el-image
+                    :src="form.image | getPreviewUrl"
+                    @click.stop="$preview(form.image)"
+                    fit="fill"/>
+                </div>
+                <i slot="reference" class="el-icon-picture"/>
+              </el-popover>
+            </template>
+
+            <el-dropdown
+              slot="append"
+              :show-timeout="50"
+              @command="handleCommand">
+              <el-button icon="el-icon-upload"/>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="storage" icon="el-icon-finished">资源选择</el-dropdown-item>
+                <el-dropdown-item command="upload" icon="el-icon-upload2">上传资源</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </el-input>
         </el-form-item>
+
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <el-form-item
+              label="图标"
+              prop="icon">
+              <el-input
+                v-model="form.icon"
+                placeholder="可输入导航图标"
+                :clearable="true"/>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="12">
+            <el-form-item
+              label="打开方式"
+              prop="target">
+              <el-radio-group v-model="form.target">
+                <el-radio label="_self">当前窗口</el-radio>
+                <el-radio label="_blank">新窗口</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
         <el-form-item
           label="排序值"
@@ -206,6 +278,23 @@
           @click="update"
           size="small">修改</el-button>
       </div>
+
+      <cs-storage
+        ref="storage"
+        style="display: none;"
+        :limit="1"
+        @confirm="_getStorageFileList">
+      </cs-storage>
+
+      <cs-upload
+        style="display: none;"
+        ref="upload"
+        type="slot"
+        accept="image/*"
+        :limit="1"
+        :multiple="false"
+        @confirm="_getUploadFileList">
+      </cs-upload>
     </el-dialog>
   </div>
 </template>
@@ -221,6 +310,10 @@ import {
 import util from '@/utils/util'
 
 export default {
+  components: {
+    csUpload: () => import('@/components/cs-upload'),
+    csStorage: () => import('@/components/cs-storage')
+  },
   props: {
     loading: {
       default: false
@@ -275,6 +368,8 @@ export default {
       form: {
         name: undefined,
         url: undefined,
+        image: undefined,
+        icon: undefined,
         target: undefined,
         sort: undefined,
         status: undefined
@@ -304,6 +399,20 @@ export default {
             trigger: 'blur'
           }
         ],
+        image: [
+          {
+            max: 512,
+            message: '长度不能大于 512 个字符',
+            trigger: 'blur'
+          }
+        ],
+        icon: [
+          {
+            max: 64,
+            message: '长度不能大于 64 个字符',
+            trigger: 'blur'
+          }
+        ],
         sort: [
           {
             type: 'number',
@@ -320,6 +429,11 @@ export default {
         this.currentTableData = val
       },
       immediate: true
+    }
+  },
+  filters: {
+    getPreviewUrl(val) {
+      return val ? util.getImageCodeUrl(val, 'common_image') : ''
     }
   },
   mounted() {
@@ -370,11 +484,53 @@ export default {
 
       this.$emit('sort', sort)
     },
+    // 资源下拉框事件
+    handleCommand(command) {
+      switch (command) {
+        case 'storage':
+          this.$refs.storage.handleStorageDlg([0, 2])
+          break
+
+        case 'upload':
+          this.$refs.upload.handleUploadDlg()
+          break
+      }
+    },
+    // 获取上传资源
+    _getUploadFileList(files) {
+      if (!files.length) {
+        return
+      }
+
+      const response = files[0].response
+      if (!response || response.status !== 200) {
+        return
+      }
+
+      if (response.data[0].type === 0) {
+        this.form.image = response.data[0].url
+      }
+    },
+    // 获取选择资源
+    _getStorageFileList(files) {
+      if (!files.length) {
+        return
+      }
+
+      for (const value of files) {
+        if (value.type === 0) {
+          this.form.image = value.url
+          break
+        }
+      }
+    },
     // 弹出新建对话框
     handleCreate() {
       this.form = {
         name: undefined,
         url: undefined,
+        image: undefined,
+        icon: undefined,
         target: '_blank',
         sort: 50,
         status: '1'
@@ -544,3 +700,19 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.popover-image {
+  text-align: center;
+  line-height: 0;
+}
+
+.popover-image >>> img {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.el-image >>> .el-image__error {
+  line-height: 1.4;
+}
+</style>
