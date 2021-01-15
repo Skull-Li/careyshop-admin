@@ -12,7 +12,7 @@
       :loading="loading"
       :tree-data="tree"
       :module="module"
-      :group="group"
+      :auth-group="group"
       :whitelist="whitelist"
       @refresh="handleRefresh"
       ref="rule"/>

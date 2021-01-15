@@ -304,7 +304,7 @@ export default {
     module: {
       default: () => {}
     },
-    group: {
+    authGroup: {
       default: () => {}
     },
     whitelist: {
@@ -346,6 +346,7 @@ export default {
         create: '新增权限',
         update: '编辑权限'
       },
+      group: this.authGroup,
       menuAuth: [],
       logAuth: [],
       rules: {
@@ -560,6 +561,25 @@ export default {
           this.$emit('refresh')
         })
     },
+    // 切换用户组
+    switchGroup(val) {
+      this.group = {}
+
+      if (!val || val === 'api') {
+        this.group = { ...this.authGroup }
+        return
+      }
+
+      for (let key in this.authGroup) {
+        if (!Object.prototype.hasOwnProperty.call(this.authGroup, key)) {
+          continue
+        }
+
+        if (this.authGroup[key].module === val) {
+          this.group[key] = { ...this.authGroup[key] }
+        }
+      }
+    },
     // 切换模块菜单
     switchModule(val) {
       if (!val) {
@@ -625,6 +645,7 @@ export default {
     },
     // 新增表单初始化
     handleCreate(status, module = null) {
+      // 重置表单与元素
       this.resetForm()
       this.resetElements(status)
 
