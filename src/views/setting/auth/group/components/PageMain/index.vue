@@ -492,7 +492,7 @@ export default {
     },
     // 请求删除用户组
     handleDelete(index) {
-      this.$confirm('确定要执行该操作吗?', '提示', {
+      this.$confirm('删除后对应的“权限规则”也将被删除，确定执行该操作?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
