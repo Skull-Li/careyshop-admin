@@ -166,11 +166,14 @@
         <el-form-item
           label="模块"
           prop="module">
-          <el-radio-group v-model="form.module" size="small">
+          <el-radio-group
+            v-model="form.module"
+            size="small">
             <el-radio-button
                 v-for="(item, index) in module"
                 :key="index"
-                :label="index">{{item}}</el-radio-button>
+                :label="index"
+                :disabled="form.module !== index">{{item}}</el-radio-button>
           </el-radio-group>
         </el-form-item>
 
