@@ -132,7 +132,7 @@
           class="box-card"
           shadow="never">
           <div slot="header">
-            <span>{{formMap[formStatus]}}</span>
+            <span>{{formMap[formStatus] + getModuleName(form.module)}}权限</span>
             <el-button
               v-if="formStatus === 'create' && auth.add"
               type="text"
@@ -172,6 +172,7 @@
                     <el-radio-button
                         v-for="(item, index) in module"
                         :key="index"
+                        :disabled="form.module !== index && formStatus !== 'create'"
                         :label="index">{{item}}</el-radio-button>
                   </el-radio-group>
                 </el-form-item>
@@ -343,10 +344,10 @@ export default {
       formStatus: 'create',
       formLoading: false,
       formMap: {
-        create: '新增权限',
-        update: '编辑权限'
+        create: '新增',
+        update: '编辑'
       },
-      group: this.authGroup,
+      group: {},
       menuAuth: [],
       logAuth: [],
       rules: {
@@ -373,7 +374,7 @@ export default {
           {
             required: true,
             message: '至少选择一项',
-            trigger: 'change'
+            trigger: 'blur'
           }
         ],
         sort: [
@@ -391,8 +392,12 @@ export default {
       this.$refs.tree.filter(val)
     },
     'form.module': {
-      handler(val) {
+      handler(val, oldVal) {
         this.switchModule(val)
+
+        if (val !== oldVal) {
+          this.switchGroup(val)
+        }
       },
       deep: true
     }
@@ -413,7 +418,7 @@ export default {
     // 获取模块名称
     getModuleName(val) {
       if (!Object.prototype.hasOwnProperty.call(this.module, val)) {
-        return ''
+        return '顶层'
       }
 
       return this.module[val]
@@ -532,9 +537,11 @@ export default {
       }
 
       // 处理el-select项不存在的bug
-      if (!Object.prototype.hasOwnProperty.call(this.group, this.form.group_id)) {
-        this.form.group_id = undefined
-      }
+      this.$nextTick(() => {
+        if (!Object.prototype.hasOwnProperty.call(this.group, this.form.group_id)) {
+          this.form.group_id = undefined
+        }
+      })
     },
     // 判断节点是否能被拖动
     allowDrag(draggingNode) {
@@ -564,7 +571,6 @@ export default {
     // 切换用户组
     switchGroup(val) {
       this.group = {}
-
       if (!val || val === 'api') {
         this.group = { ...this.authGroup }
         return
@@ -585,6 +591,10 @@ export default {
       if (!val) {
         this.menuData = []
         return
+      }
+
+      if (this.formStatus === 'create') {
+        this.form.group_id = undefined
       }
 
       this.treeLoading = true

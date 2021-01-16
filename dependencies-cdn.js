@@ -32,25 +32,25 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'better-scroll',
       library: 'BetterScroll',
-      js: 'https://cdn.jsdelivr.net/npm/better-scroll@2.1.0/dist/better-scroll.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/better-scroll@2.1.1/dist/better-scroll.min.js',
       css: ''
     },
     {
       name: 'element-ui',
       library: 'ELEMENT',
-      js: 'https://cdn.jsdelivr.net/npm/element-ui@2.14.1/lib/index.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/element-ui@2.14.1/lib/theme-chalk/index.css'
+      js: 'https://cdn.jsdelivr.net/npm/element-ui@2.15.0/lib/index.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/element-ui@2.15.0/lib/theme-chalk/index.css'
     },
     {
       name: 'dayjs',
       library: 'dayjs',
-      js: 'https://cdn.jsdelivr.net/npm/dayjs@1.10.1/dayjs.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/dayjs@1.10.3/dayjs.min.js',
       css: ''
     },
     {
       name: 'fuse.js',
       library: 'Fuse',
-      js: 'https://cdn.jsdelivr.net/npm/fuse.js@6.4.5/dist/fuse.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js',
       css: ''
     },
     {
