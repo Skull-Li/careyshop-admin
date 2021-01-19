@@ -56,7 +56,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'hotkeys-js',
       library: 'hotkeys',
-      js: 'https://cdn.jsdelivr.net/npm/hotkeys-js@3.8.1/dist/hotkeys.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/hotkeys-js@3.8.2/dist/hotkeys.min.js',
       css: ''
     },
     {
