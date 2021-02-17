@@ -14,13 +14,13 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'vue-router',
       library: 'VueRouter',
-      js: 'https://cdn.jsdelivr.net/npm/vue-router@3.4.9/dist/vue-router.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/vue-router@3.5.1/dist/vue-router.min.js',
       css: ''
     },
     {
       name: 'vuex',
       library: 'Vuex',
-      js: 'https://cdn.jsdelivr.net/npm/vuex@3.6.0/dist/vuex.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/vuex@3.6.2/dist/vuex.min.js',
       css: ''
     },
     {
@@ -32,7 +32,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'better-scroll',
       library: 'BetterScroll',
-      js: 'https://cdn.jsdelivr.net/npm/better-scroll@2.1.1/dist/better-scroll.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/better-scroll@2.2.0/dist/better-scroll.min.js',
       css: ''
     },
     {
@@ -44,7 +44,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'dayjs',
       library: 'dayjs',
-      js: 'https://cdn.jsdelivr.net/npm/dayjs@1.10.3/dayjs.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js',
       css: ''
     },
     {
@@ -104,7 +104,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'ua-parser-js',
       library: 'UAParser',
-      js: 'https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.23/dist/ua-parser.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.24/dist/ua-parser.min.js',
       css: ''
     },
     {
