@@ -51,7 +51,7 @@ CareyShop Rest接口调试 [Github 仓库](https://github.com/dnyz520/careyshop-
 在您使用本项目前，请先安装好 [node](https://nodejs.org "node")。项目技术栈基于 [es2015+](http://es6.ruanyifeng.com/ "es2015+")、[vue](https://cn.vuejs.org/ "vue")、[vuex](https://vuex.vuejs.org/ "vuex")、[vue-router](https://router.vuejs.org/ "vue-router") 、[vue-cli4](https://cli.vuejs.org/ "vue-cli") 、[axios](https://github.com/axios/axios "axios") 和 [element-ui](https://element.eleme.io/ "element-ui")，所有的请求数据都基于 rest 协议。
 
 ## 安装
-> 如果您以前运行过 webpack 项目，并且本机 node 版本 >= 8，可以忽略这一步。
+> 如果您以前运行过 webpack 项目，并且本机 node 版本 >= 10，可以忽略这一步。
 
 > 以下安装过程基本都使用命令行，请在适合的命令环境下输入。
 
@@ -59,10 +59,10 @@ CareyShop Rest接口调试 [Github 仓库](https://github.com/dnyz520/careyshop-
 在 [node.js](https://nodejs.org/en/download/ "node.js 官网") 官网下载合适您系统的 node.js（推荐 10 以上的版本），安装完毕后可查看版本号。
 ```shell
 node -v
-v10.13.0
+v14.15.5
 
 npm -v
-6.12.0
+6.14.11
 ```
 
 ### 安装 @vue/cli
