@@ -79,7 +79,7 @@
             </div>
           </div>
 
-          <div class="goods-comment" v-if="scope.row.get_addition">
+          <div class="goods-comment" v-if="Object.keys(scope.row.get_addition).length">
             <p>[追评] <span class="comment-son">{{scope.row.get_addition.create_time}}</span></p>
             <p>
               <span

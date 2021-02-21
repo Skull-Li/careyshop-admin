@@ -134,7 +134,7 @@
 
         <!-- 追评 -->
         <el-timeline-item
-          v-if="tableData.get_addition"
+          v-if="Object.keys(tableData.get_addition).length"
           :timestamp="`[追评] ${tableData.get_addition.create_time}`"
           type="primary"
           placement="top">
