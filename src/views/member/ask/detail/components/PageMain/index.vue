@@ -115,13 +115,12 @@ import { replyAskItem } from '@/api/user/ask'
 export default {
   props: {
     tableData: {
-      default: () => []
+      default: () => {}
     }
   },
   data() {
     return {
       form: {},
-      formBuffer: {},
       rules: {
         answer: [
           {
@@ -158,26 +157,6 @@ export default {
   filters: {
     getPreviewUrl(val) {
       return val ? util.getImageCodeUrl(val, 'head_pic') : ''
-    }
-  },
-  watch: {
-    'tableData.ask_id': {
-      handler(val) {
-        if (val > 0) {
-          if (this.formBuffer[val]) {
-            this.form = this.formBuffer[val] || {}
-          } else {
-            this.formBuffer[val] = { answer: undefined }
-            this.form = this.formBuffer[val]
-          }
-
-          this.$nextTick(() => {
-            if (this.$refs.form) {
-              this.$refs.form.clearValidate()
-            }
-          })
-        }
-      }
     }
   },
   methods: {
