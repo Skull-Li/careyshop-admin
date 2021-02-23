@@ -38,7 +38,7 @@ export default {
       component: () => import('@/views/system/article/article/create')
     },
     {
-      path: 'article/update/:article_id',
+      path: 'article/update',
       name: `${pre}article-update`,
       props: true,
       meta: { ...meta, cache: true, title: '编辑文章' },

@@ -181,6 +181,7 @@ export default {
         pageOpendIndex = same ? index : pageOpendIndex
         return same
       })
+
       if (pageOpend) {
         // 页面以前打开过
         await dispatch('openedUpdate', {
@@ -424,6 +425,12 @@ export default {
      * @param {String} name name
      */
     keepAliveRemove(state, name) {
+      // 当页面列表中存在多个标签时暂时不清理缓存页面
+      const opened = state.opened.filter(item => item.name === name)
+      if (opened.length > 1) {
+        return
+      }
+
       const list = cloneDeep(state.keepAlive)
       const index = list.findIndex(item => item === name)
 
@@ -438,6 +445,11 @@ export default {
      * @param name  name
      */
     keepAlivePush(state, name) {
+      // 当页面列表中已经存在缓存页面则不添加
+      if (state.keepAlive.includes(name)) {
+        return
+      }
+
       const keep = cloneDeep(state.keepAlive)
       keep.push(name)
       state.keepAlive = uniq(keep)
