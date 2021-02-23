@@ -32,6 +32,13 @@ export default {
       csScroll: { x: 0, y: 0 }
     }
   },
+  created() {
+    // 解决Firefox下拖拽结束后会新开搜索窗口
+    document.body.ondrop = (event) => {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  },
   computed: {
     // 始终返回渲染组件
     component() {

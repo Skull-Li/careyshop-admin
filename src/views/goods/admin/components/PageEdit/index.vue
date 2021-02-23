@@ -1211,13 +1211,6 @@ export default {
       }
     }
   },
-  created() {
-    // 解决Firefox下拖拽结束后会新开搜索窗口
-    document.body.ondrop = (event) => {
-      event.preventDefault()
-      event.stopPropagation()
-    }
-  },
   filters: {
     getPreviewUrl(val, code) {
       if (val && (val.source || val)) {
