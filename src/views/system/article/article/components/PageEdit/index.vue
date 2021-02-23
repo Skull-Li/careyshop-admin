@@ -183,9 +183,9 @@
 </template>
 
 <script>
+import util from '@/utils/util'
 import { mapActions } from 'vuex'
 import { addArticleItem, setArticleItem } from '@/api/article/article'
-import util from '@/utils/util'
 
 export default {
   components: {

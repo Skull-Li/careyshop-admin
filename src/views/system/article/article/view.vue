@@ -40,11 +40,7 @@ export default {
     }
   },
   methods: {
-    resetArticleData() {
-      this.article = {}
-    },
     getArticleData() {
-      this.resetArticleData()
       getArticleItem(this.article_id)
         .then(res => {
           this.article = res.data || {}

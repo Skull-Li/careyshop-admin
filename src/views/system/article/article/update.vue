@@ -11,6 +11,7 @@
 
 <script>
 import util from '@/utils/util'
+import { mapActions } from 'vuex'
 import { getArticleCatList } from '@/api/article/cat'
 import { getArticleItem } from '@/api/article/article'
 
@@ -22,7 +23,7 @@ export default {
   props: {
     article_id: {
       type: [Number, String],
-      required: true
+      required: false
     }
   },
   data() {
@@ -32,41 +33,22 @@ export default {
       // 整理后的分类数据
       catData: [],
       // 表单数据
-      formData: {},
-      // 表单数据缓存
-      formBuffer: {},
-      // 判断是否路由进入
-      isSourceRoute: false
+      formData: {}
+    }
+  },
+  activated() {
+    if (!this.article_id) {
+      this.$router.push({ name: 'index' })
+      this.handleClose()
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      if (!this.isSourceRoute && !Object.keys(this.formBuffer).length) {
-        this.switchData(this.article_id)
-      }
-    })
-  },
-  // 第一次进入或从其他组件对应路由进入时触发
-  beforeRouteEnter(to, from, next) {
-    if (to.params.article_id) {
-      next(instance => {
-        instance.switchData(to.params.article_id)
-        instance.isSourceRoute = true
-      })
-    } else {
-      next(new Error('未指定ID'))
-    }
-  },
-  // 在同一组件对应的多个路由间切换时触发
-  beforeRouteUpdate(to, from, next) {
-    if (to.params.article_id) {
-      this.switchData(to.params.article_id)
-      next()
-    } else {
-      next(new Error('未指定ID'))
-    }
+    // this.getArticleData()
   },
   methods: {
+    ...mapActions('careyshop/page', [
+      'close'
+    ]),
     setArticleData(data) {
       // 数据类型转为字符型
       data.is_top = data.is_top.toString()
@@ -74,39 +56,31 @@ export default {
 
       return data
     },
-    switchData(id) {
-      // 缓存存在则返回缓存数据(已加工数据)
-      if (this.formBuffer[id]) {
-        this.formData = this.formBuffer[id] || {}
-        return
-      }
-
-      // 否则从服务器上获取数据(未加工原始数据)
-      this.$nextTick(() => {
-        this.formData = {}
-        if (this.catList.length) {
-          // 分类数据已存在时
-          getArticleItem(id)
-            .then(res => {
-              this.formBuffer[id] = this.setArticleData({ ...res.data })
-              this.formData = this.formBuffer[id]
-            })
-        } else {
-          // 分类数据不存在时
-          Promise.all([
-            getArticleCatList(null),
-            getArticleItem(id)
-          ])
-            .then(res => {
-              // 处理分类数据
-              this.catList = res[0].data || []
-              this.catData = util.formatDataToTree(this.catList, 'article_cat_id')
-
-              // 处理文章数据
-              this.formBuffer[id] = this.setArticleData({ ...res[1].data })
-              this.formData = this.formBuffer[id]
-            })
-        }
+    // getArticleData() {
+    //   // id存在表示已获取原始数据
+    //   if (this.formData.article_id) {
+    //     return
+    //   }
+    //
+    //   this.$nextTick(() => {
+    //     Promise.all([
+    //       getArticleCatList(null),
+    //       getArticleItem(this.article_id)
+    //     ])
+    //       .then(res => {
+    //         // 处理分类数据
+    //         this.catList = res[0].data || []
+    //         this.catData = util.formatDataToTree(this.catList, 'article_cat_id')
+    //
+    //         // 处理文章数据
+    //         this.formData = this.setArticleData({ ...res[1].data })
+    //       })
+    //   })
+    // },
+    // 关闭当前窗口
+    handleClose() {
+      this.close({
+        tagName: this.$route.fullPath
       })
     }
   }
