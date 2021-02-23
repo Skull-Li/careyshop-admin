@@ -51,7 +51,7 @@
         prop="ask_type"
         sortable="custom">
         <template slot-scope="scope">
-          {{typeList[scope.row.type]}}
+          {{typeList[scope.row.ask_type]}}
         </template>
       </el-table-column>
 

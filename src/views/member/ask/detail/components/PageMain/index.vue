@@ -24,7 +24,7 @@
 
           <el-col :span="9">
             <span class="text-explode">类型：</span>
-            <span>{{tableData.type !== null ? typeList[tableData.type] : ''}}</span>
+            <span>{{tableData.ask_type !== null ? typeList[tableData.ask_type] : ''}}</span>
           </el-col>
 
           <el-col :span="6">
