@@ -39,11 +39,7 @@ export default {
     }
   },
   methods: {
-    resetMessageData() {
-      this.message = {}
-    },
     getMessageData() {
-      this.resetMessageData()
       getMessageItem(this.message_id)
         .then(res => {
           this.message = res.data || {}
