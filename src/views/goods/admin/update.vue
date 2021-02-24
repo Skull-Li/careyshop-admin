@@ -4,6 +4,7 @@
       <page-edit
         ref="update"
         state="update"
+        :goods-id="goods_id"
         :confirm-loading.sync="confirmLoading"
         @close="handleClose">
       </page-edit>

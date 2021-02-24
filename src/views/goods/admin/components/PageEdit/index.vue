@@ -1003,6 +1003,10 @@ export default {
       type: String,
       required: true,
       default: 'create'
+    },
+    goodsId: {
+      type: [Number, String],
+      required: false
     }
   },
   data() {
@@ -1244,7 +1248,7 @@ export default {
       })
       .then(() => {
         if (this.state === 'update') {
-          this.handleGoodsData(this.$route.params.goods_id)
+          this.handleGoodsData()
         }
       })
   },
@@ -1312,11 +1316,11 @@ export default {
         })
     },
     // 获取商品数据
-    handleGoodsData(goods_id) {
+    handleGoodsData() {
       Promise.all([
-        getGoodsItem(goods_id),
-        getGoodsAttrConfig(goods_id),
-        getGoodsSpecConfig(goods_id, 1)
+        getGoodsItem(this.goodsId),
+        getGoodsAttrConfig(this.goodsId),
+        getGoodsSpecConfig(this.goodsId, 1)
       ])
         .then(res => {
           let currentForm = res[0].data || {}
