@@ -125,7 +125,7 @@ import { getGoodsSelect } from '@/api/goods/goods'
 
 export default {
   components: {
-    csGoodsDrawer: () => import('@/components/cs-goods-drawer')
+    csGoodsDrawer: () => import('@/careyshop/cs-goods-drawer')
   },
   props: {
     // 外部v-model值

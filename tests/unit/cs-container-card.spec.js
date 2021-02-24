@@ -1,5 +1,5 @@
 import { mount, config } from '@vue/test-utils'
-import CsContainerCard from '@/components/cs-container/components/cs-container-card.vue'
+import CsContainerCard from '@/careyshop/cs-container/components/cs-container-card.vue'
 
 config.showDeprecationWarnings = false
 

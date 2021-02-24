@@ -488,9 +488,9 @@ import { setSystemList } from '@/api/config/setting'
 
 export default {
   components: {
-    csUpload: () => import('@/components/cs-upload'),
-    csStorage: () => import('@/components/cs-storage'),
-    csUserSelect: () => import('@/components/cs-user-select')
+    csUpload: () => import('@/careyshop/cs-upload'),
+    csStorage: () => import('@/careyshop/cs-storage'),
+    csUserSelect: () => import('@/careyshop/cs-user-select')
   },
   data() {
     return {

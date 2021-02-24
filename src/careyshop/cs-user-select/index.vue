@@ -1,9 +1,9 @@
 <template>
-  <div class="goods-control" @click="handleShowDlg">
+  <div class="user-control" @click="handleShowDlg">
     <slot name="control"/>
 
     <el-dialog
-      title="商品选取"
+      title="账号选取"
       :visible.sync="visible"
       :append-to-body="true"
       :close-on-click-modal="false"
@@ -13,7 +13,7 @@
       <!-- 搜索框开始 -->
       <el-form :model="form" style="margin-top: -25px;" size="small" @submit.native.prevent>
         <el-row :gutter="20">
-          <el-col :span="10">
+          <el-col :span="12">
             <el-form-item>
               <el-radio-group v-model="isSelection" @change="handleSubmit(true)">
                 <el-radio-button :label="false">全部</el-radio-button>
@@ -27,11 +27,11 @@
             </el-form-item>
           </el-col>
 
-          <el-col :span="14">
-            <el-form-item prop="keywords">
+          <el-col :span="12">
+            <el-form-item prop="account">
               <el-input
-                v-model="form.keywords"
-                placeholder="输入商品名称进行搜索"
+                v-model="form.account"
+                placeholder="可输入账号/昵称进行搜索"
                 @keyup.enter.native="handleSubmit(true)"
                 :clearable="true"
                 size="small">
@@ -46,7 +46,7 @@
       <el-table
         ref="multipleTable"
         :data="tableData"
-        row-key="goods_id"
+        :row-key="typeUser === 'client' ? 'user_id' : 'admin_id'"
         @selection-change="handleSelectionChange">
         <el-table-column
           :reserve-selection="true"
@@ -56,38 +56,53 @@
         </el-table-column>
 
         <el-table-column
-          label="名称"
-          prop="name">
+          label="账号"
+          prop="username"
+          min-width="160">
           <template slot-scope="scope">
-            <el-image
-              class="goods-image"
-              @click="handleViewGoods(scope.row.goods_id)"
-              :src="scope.row.attachment | getPreviewUrl"
-              fit="contain"
-              lazy>
-            </el-image>
+            <el-avatar
+              class="cs-fl"
+              size="medium"
+              :src="scope.row.head_pic | getPreviewUrl">
+              <img :src="`${$publicPath}image/setting/user.png`" alt=""/>
+            </el-avatar>
 
-            <div class="goods-info">
-              <div
-                :title="scope.row.name"
-                @click="handleViewGoods(scope.row.goods_id)"
-                class="name">{{scope.row.name}}</div>
-
-              <p class="price"><span style="color: #909399;">本店价：</span>{{scope.row.shop_price | getNumber}}</p>
+            <div class="user-info cs-ml-10">
+              <div class="username">{{scope.row.username}}</div>
+              <p v-if="typeUser === 'client'" class="level">
+                <el-tooltip
+                  v-if="scope.row.get_user_level.icon"
+                  :content="scope.row.get_user_level.name"
+                  placement="top">
+                  <el-image
+                    class="level-icon"
+                    :src="scope.row.get_user_level.icon"
+                    fit="fill">
+                    <div slot="error" class="image-slot">
+                      <i class="el-icon-picture-outline"/>
+                    </div>
+                  </el-image>
+                </el-tooltip>
+              </p>
             </div>
           </template>
         </el-table-column>
 
         <el-table-column
-          label="库存"
-          prop="store_qty"
-          width="100">
+          label="昵称"
+          prop="nickname">
         </el-table-column>
 
         <el-table-column
-          label="销量"
-          prop="sales_sum"
-          width="100">
+          v-if="typeUser === 'client'"
+          label="手机号"
+          prop="mobile">
+        </el-table-column>
+
+        <el-table-column
+          v-else
+          label="所属组"
+          prop="get_auth_group.name">
         </el-table-column>
 
         <el-table-column
@@ -96,7 +111,12 @@
           align="center"
           width="80">
           <template slot-scope="scope">
-            <span>{{scope.row.status ? '出售中' : '已下架'}}</span>
+            <el-tag
+              :type="statusMap[scope.row.status].type"
+              effect="plain"
+              size="mini">
+              {{statusMap[scope.row.status].text}}
+            </el-tag>
           </template>
         </el-table-column>
       </el-table>
@@ -122,20 +142,18 @@
           size="small">确定</el-button>
       </div>
     </el-dialog>
-
-    <cs-goods-drawer ref="goodsDrawer"/>
   </div>
 </template>
 
 <script>
 import util from '@/utils/util'
-import { getGoodsAdminList, getGoodsSelect } from '@/api/goods/goods'
+import { getUserList, getUserSelect } from '@/api/user/client'
+import { getAdminList, getAdminSelect } from '@/api/user/admin'
 
 export default {
-  name: 'cs-goods-select',
+  name: 'cs-user-select',
   components: {
-    csGoodsDrawer: () => import('@/components/cs-goods-drawer'),
-    PageFooter: () => import('@/components/cs-footer')
+    PageFooter: () => import('@/careyshop/cs-footer')
   },
   props: {
     // 确认按钮事件
@@ -147,6 +165,12 @@ export default {
       type: Array,
       required: false,
       default: () => []
+    },
+    // 获取类型
+    typeUser: {
+      type: String,
+      required: false,
+      default: 'client'
     }
   },
   data() {
@@ -156,9 +180,19 @@ export default {
       isSelection: false,
       tableData: [],
       multipleSelection: [],
+      statusMap: {
+        0: {
+          text: '禁用',
+          type: 'danger'
+        },
+        1: {
+          text: '启用',
+          type: 'success'
+        }
+      },
       form: {
-        keywords: undefined,
-        goods_id: undefined
+        account: undefined,
+        client_id: undefined
       },
       page: {
         current: 1,
@@ -169,38 +203,35 @@ export default {
   },
   filters: {
     getPreviewUrl(val) {
-      if (Array.isArray(val) && val.length > 0) {
-        if (val[0].source) {
-          return util.getImageCodeUrl(val[0].source, 'goods_image_x80')
-        }
-      }
-
-      return ''
-    },
-    getNumber(val) {
-      return util.getNumber(val)
+      return val ? util.getImageCodeUrl(val, 'head_pic') : ''
     }
   },
   methods: {
+    handleShowDlg() {
+      this.visible = true
+    },
     handlePaginationChange(val) {
       this.page = val
       this.$nextTick(() => {
         this.handleSubmit()
       })
     },
-    handleShowDlg() {
-      this.visible = true
-    },
     handleOpen() {
       if (!this.isCheck && this.checkList.length) {
         let idList = []
         for (let value of this.checkList) {
-          if (Object.prototype.hasOwnProperty.call(value, 'goods_id')) {
-            idList.push(value.goods_id)
+          const typeId = this.typeUser === 'client' ? 'user_id' : 'admin_id'
+          if (Object.prototype.hasOwnProperty.call(value, typeId)) {
+            idList.push(value[typeId])
           }
         }
 
-        getGoodsSelect(idList)
+        if (this.checkList.length && !idList.length) {
+          idList = this.checkList
+        }
+
+        const funSelect = this.typeUser === 'client' ? getUserSelect : getAdminSelect
+        funSelect(idList)
           .then(res => {
             this.$nextTick(() => {
               if (res.data) {
@@ -231,13 +262,14 @@ export default {
 
       let form = { ...this.form }
       if (this.isSelection) {
-        form.goods_id = []
+        form.client_id = []
         this.multipleSelection.forEach(value => {
-          form.goods_id.push(value.goods_id)
+          form.client_id.push(value[this.typeUser === 'client' ? 'user_id' : 'admin_id'])
         })
       }
 
-      getGoodsAdminList({
+      const funList = this.typeUser === 'client' ? getUserList : getAdminList
+      funList({
         ...form,
         page_no: this.page.current,
         page_size: this.page.size
@@ -258,53 +290,33 @@ export default {
     handleConfirm() {
       this.$emit('confirm', this.multipleSelection)
       this.visible = false
-    },
-    handleViewGoods(val) {
-      this.$nextTick(() => {
-        this.$refs.goodsDrawer.show(val)
-      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.goods-control {
+.user-control {
   width: auto;
   display: inline;
 }
 
-.goods-image {
+.user-info {
   float: left;
-  width: 60px;
-  height: 60px;
 
-  &:hover {
-    cursor: pointer;
+  .username {
+    width: 160px;
+    line-height: 14px;
+    overflow: hidden;
+  }
+
+  .level {
+    margin: 0;
   }
 }
 
-.goods-info {
-  float: left;
-  width: 290px;
-  margin-left: 10px;
-
-  .name {
-    height: 36px;
-    line-height: 18px;
-    overflow: hidden;
-
-    &:hover {
-      cursor: pointer;
-      color: $color-primary;
-      text-decoration: underline;
-    }
-  }
-
-  .price {
-    margin: 0;
-    font-size: 12px;
-    color: $color-danger;
-  }
+.level-icon {
+  line-height: 0;
+  vertical-align: text-bottom;
 }
 </style>

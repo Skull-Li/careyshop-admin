@@ -28,7 +28,7 @@ export default {
   name: 'system-message-user',
   components: {
     PageMain: () => import('./components/PageMain'),
-    PageFooter: () => import('@/components/cs-footer')
+    PageFooter: () => import('@/careyshop/cs-footer')
   },
   data() {
     return {

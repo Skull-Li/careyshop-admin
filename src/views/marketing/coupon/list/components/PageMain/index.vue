@@ -654,8 +654,8 @@ import VueTableExport from '@careyshop/vue-table-export'
 
 export default {
   components: {
-    csUserSelect: () => import('@/components/cs-user-select'),
-    csGoodsCategory: () => import('@/components/cs-goods-category')
+    csUserSelect: () => import('@/careyshop/cs-user-select'),
+    csGoodsCategory: () => import('@/careyshop/cs-goods-category')
   },
   props: {
     loading: {

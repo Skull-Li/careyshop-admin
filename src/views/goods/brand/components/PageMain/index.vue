@@ -346,8 +346,8 @@ import { getGoodsCategoryItem } from '@/api/goods/category'
 
 export default {
   components: {
-    csUpload: () => import('@/components/cs-upload'),
-    csStorage: () => import('@/components/cs-storage')
+    csUpload: () => import('@/careyshop/cs-upload'),
+    csStorage: () => import('@/careyshop/cs-storage')
   },
   props: {
     loading: {

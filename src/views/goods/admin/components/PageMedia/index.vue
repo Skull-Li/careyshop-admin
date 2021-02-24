@@ -96,7 +96,7 @@ import { debounce, isEmpty } from 'lodash'
 
 export default {
   components: {
-    csVideo: () => import('@/components/cs-video')
+    csVideo: () => import('@/careyshop/cs-video')
   },
   props: {
     image: {

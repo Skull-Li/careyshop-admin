@@ -196,7 +196,7 @@ import { setCardUseInvalid } from '@/api/marketing/card_use'
 
 export default {
   components: {
-    csPrint: () => import('@/components/cs-print')
+    csPrint: () => import('@/careyshop/cs-print')
   },
   props: {
     loading: {

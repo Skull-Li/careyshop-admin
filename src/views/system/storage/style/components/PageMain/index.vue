@@ -604,7 +604,7 @@ import { debounce } from 'lodash'
 
 export default {
   components: {
-    csUpload: () => import('@/components/cs-upload')
+    csUpload: () => import('@/careyshop/cs-upload')
   },
   props: {
     tableData: {

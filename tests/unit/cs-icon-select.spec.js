@@ -1,5 +1,5 @@
 import { mount, config, createLocalVue } from '@vue/test-utils'
-import CsIconSelect from '@/components/cs-icon-select/index.vue'
+import CsIconSelect from '@/careyshop/cs-icon-select/index.vue'
 import ElementUI from 'element-ui'
 
 config.showDeprecationWarnings = false

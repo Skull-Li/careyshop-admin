@@ -16,8 +16,8 @@ import { plugins, toolbar } from './config/config'
 export default {
   name: 'cs-tinymce',
   components: {
-    csUpload: () => import('@/components/cs-upload'),
-    csStorage: () => import('@/components/cs-storage')
+    csUpload: () => import('@/careyshop/cs-upload'),
+    csStorage: () => import('@/careyshop/cs-storage')
   },
   props: {
     // 外部v-model值

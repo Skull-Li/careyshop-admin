@@ -189,9 +189,9 @@ import { addArticleItem, setArticleItem } from '@/api/article/article'
 
 export default {
   components: {
-    csUpload: () => import('@/components/cs-upload'),
-    csStorage: () => import('@/components/cs-storage'),
-    csTinymce: () => import('@/components/cs-tinymce')
+    csUpload: () => import('@/careyshop/cs-upload'),
+    csStorage: () => import('@/careyshop/cs-storage'),
+    csTinymce: () => import('@/careyshop/cs-tinymce')
   },
   props: {
     // 编辑状态

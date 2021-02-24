@@ -278,7 +278,7 @@
 <script>
 import util from '@/utils/util'
 import * as clipboard from 'clipboard-polyfill'
-import storage from '@/components/cs-storage/components/mixins/storage'
+import storage from '@/careyshop/cs-storage/components/mixins/storage'
 import {
   delStorageList,
   addStorageDirectoryItem,
@@ -294,8 +294,8 @@ import {
 export default {
   mixins: [storage],
   components: {
-    csUpload: () => import('@/components/cs-upload'),
-    csStorage: () => import('@/components/cs-storage')
+    csUpload: () => import('@/careyshop/cs-upload'),
+    csStorage: () => import('@/careyshop/cs-storage')
   },
   props: {
     tableData: {

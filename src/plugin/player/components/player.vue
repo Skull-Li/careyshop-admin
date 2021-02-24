@@ -22,7 +22,7 @@ import util from '@/utils/util'
 export default {
   name: 'player',
   components: {
-    csVideo: () => import('@/components/cs-video')
+    csVideo: () => import('@/careyshop/cs-video')
   },
   data() {
     return {

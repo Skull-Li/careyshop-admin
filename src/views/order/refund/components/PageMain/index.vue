@@ -159,7 +159,7 @@ import util from '@/utils/util'
 
 export default {
   components: {
-    csOrderRefund: () => import('@/components/cs-order-refund')
+    csOrderRefund: () => import('@/careyshop/cs-order-refund')
   },
   props: {
     toPayment: {

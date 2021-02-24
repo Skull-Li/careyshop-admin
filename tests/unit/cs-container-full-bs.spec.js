@@ -1,5 +1,5 @@
 import { mount, config } from '@vue/test-utils'
-import CsContainerFullBs from '@/components/cs-container/components/cs-container-full-bs.vue'
+import CsContainerFullBs from '@/careyshop/cs-container/components/cs-container-full-bs.vue'
 
 config.showDeprecationWarnings = false
 

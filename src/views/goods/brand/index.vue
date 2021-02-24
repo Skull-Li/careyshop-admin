@@ -34,7 +34,7 @@ export default {
   components: {
     PageHeader: () => import('./components/PageHeader'),
     PageMain: () => import('./components/PageMain'),
-    PageFooter: () => import('@/components/cs-footer')
+    PageFooter: () => import('@/careyshop/cs-footer')
   },
   data() {
     return {

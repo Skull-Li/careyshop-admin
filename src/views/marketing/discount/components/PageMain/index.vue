@@ -259,7 +259,7 @@ import dayjs from 'dayjs'
 export default {
   components: {
     PageGoods: () => import('../PageGoods'),
-    csGoodsSelect: () => import('@/components/cs-goods-select')
+    csGoodsSelect: () => import('@/careyshop/cs-goods-select')
   },
   props: {
     loading: {

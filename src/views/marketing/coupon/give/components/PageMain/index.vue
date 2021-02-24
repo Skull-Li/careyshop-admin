@@ -252,7 +252,7 @@ import { delCouponGiveList, recCouponGiveList } from '@/api/marketing/coupon_giv
 
 export default {
   components: {
-    csPrint: () => import('@/components/cs-print')
+    csPrint: () => import('@/careyshop/cs-print')
   },
   props: {
     loading: {

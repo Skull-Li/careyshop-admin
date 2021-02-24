@@ -432,7 +432,7 @@ export default {
     serviceMixins
   ],
   components: {
-    csOrderRefund: () => import('@/components/cs-order-refund')
+    csOrderRefund: () => import('@/careyshop/cs-order-refund')
   },
   props: {
     service_no: {

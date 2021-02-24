@@ -14,9 +14,9 @@ import { getDeliveryCompanySelect } from '@/api/logistics/company'
 
 export default {
   components: {
-    csRegionSelect: () => import('@/components/cs-region-select'),
-    csDeliveryDist: () => import('@/components/cs-delivery-dist'),
-    csGoodsDrawer: () => import('@/components/cs-goods-drawer')
+    csRegionSelect: () => import('@/careyshop/cs-region-select'),
+    csDeliveryDist: () => import('@/careyshop/cs-delivery-dist'),
+    csGoodsDrawer: () => import('@/careyshop/cs-goods-drawer')
   },
   data() {
     return {

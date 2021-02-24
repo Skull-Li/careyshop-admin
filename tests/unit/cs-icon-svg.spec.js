@@ -1,5 +1,5 @@
 import { mount, config } from '@vue/test-utils'
-import CsIconSvg from '@/components/cs-icon-svg/index.vue'
+import CsIconSvg from '@/careyshop/cs-icon-svg/index.vue'
 
 config.showDeprecationWarnings = false
 

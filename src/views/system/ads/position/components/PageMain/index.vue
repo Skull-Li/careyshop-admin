@@ -377,10 +377,10 @@ import util from '@/utils/util'
 
 export default {
   components: {
-    csUpload: () => import('@/components/cs-upload'),
-    csStorage: () => import('@/components/cs-storage'),
-    csPhoto: () => import('@/components/cs-photo'),
-    csTinymce: () => import('@/components/cs-tinymce')
+    csUpload: () => import('@/careyshop/cs-upload'),
+    csStorage: () => import('@/careyshop/cs-storage'),
+    csPhoto: () => import('@/careyshop/cs-photo'),
+    csTinymce: () => import('@/careyshop/cs-tinymce')
   },
   props: {
     tableData: {

@@ -1,5 +1,5 @@
 import { mount, config } from '@vue/test-utils'
-import CsContainerFrame from '@/components/cs-container-frame/index.vue'
+import CsContainerFrame from '@/careyshop/cs-container-frame/index.vue'
 
 config.showDeprecationWarnings = false
 

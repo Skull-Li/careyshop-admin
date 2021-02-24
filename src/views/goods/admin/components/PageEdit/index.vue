@@ -988,11 +988,11 @@ import { getGoodsAttributeList } from '@/api/goods/attribute'
 export default {
   components: {
     PageSpec: () => import('../PageSpec'),
-    csUpload: () => import('@/components/cs-upload'),
-    csStorage: () => import('@/components/cs-storage'),
-    csTinymce: () => import('@/components/cs-tinymce'),
-    csVideo: () => import('@/components/cs-video'),
-    csPhoto: () => import('@/components/cs-photo'),
+    csUpload: () => import('@/careyshop/cs-upload'),
+    csStorage: () => import('@/careyshop/cs-storage'),
+    csTinymce: () => import('@/careyshop/cs-tinymce'),
+    csVideo: () => import('@/careyshop/cs-video'),
+    csPhoto: () => import('@/careyshop/cs-photo'),
     draggable: () => import('vuedraggable')
   },
   props: {

@@ -204,7 +204,7 @@ import { getUploadModule } from '@/api/upload/upload'
 
 export default {
   components: {
-    csTabEdit: () => import('@/components/cs-tab-edit')
+    csTabEdit: () => import('@/careyshop/cs-tab-edit')
   },
   data() {
     return {

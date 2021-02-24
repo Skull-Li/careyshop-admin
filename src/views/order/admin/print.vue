@@ -336,7 +336,7 @@ import { getPaymentList } from '@/api/payment/payment'
 export default {
   name: 'order-admin-print',
   components: {
-    csPrint: () => import('@/components/cs-print')
+    csPrint: () => import('@/careyshop/cs-print')
   },
   computed: {
     outPrint() {

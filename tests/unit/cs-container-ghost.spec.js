@@ -1,5 +1,5 @@
 import { mount, config } from '@vue/test-utils'
-import CsContainerGhost from '@/components/cs-container/components/cs-container-ghost.vue'
+import CsContainerGhost from '@/careyshop/cs-container/components/cs-container-ghost.vue'
 
 config.showDeprecationWarnings = false
 

@@ -129,7 +129,7 @@ export default {
   name: 'cs-storage',
   mixins: [storage],
   components: {
-    PageFooter: () => import('@/components/cs-footer')
+    PageFooter: () => import('@/careyshop/cs-footer')
   },
   props: {
     // 确认按钮事件

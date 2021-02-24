@@ -6,7 +6,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'flex.css'
 
 // 组件
-import '@/components'
+import '@/careyshop'
 
 // svg 图标
 import '@/assets/svg-icons'

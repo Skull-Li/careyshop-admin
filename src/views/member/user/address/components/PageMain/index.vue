@@ -194,7 +194,7 @@ import {
 
 export default {
   components: {
-    csRegionSelect: () => import('@/components/cs-region-select')
+    csRegionSelect: () => import('@/careyshop/cs-region-select')
   },
   props: {
     loading: {
