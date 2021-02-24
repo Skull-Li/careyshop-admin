@@ -24,39 +24,15 @@ export default {
   },
   data() {
     return {
-      // 表格数据
-      table: this.getInitData(),
-      // 表格缓存数据
-      tableBuffer: {},
-      // 判断是否路由进入
-      isSourceRoute: false
+      table: this.getInitData()
     }
   },
-  mounted() {
-    this.$nextTick(() => {
-      if (!this.isSourceRoute && !Object.keys(this.tableBuffer).length) {
-        this.switchData(this.goods_comment_id)
-      }
-    })
-  },
-  // 第一次进入或从其他组件对应路由进入时触发
-  beforeRouteEnter(to, from, next) {
-    if (to.params.goods_comment_id) {
-      next(instance => {
-        instance.switchData(to.params.goods_comment_id)
-        instance.isSourceRoute = true
-      })
-    } else {
-      next(new Error('未指定ID'))
-    }
-  },
-  // 在同一组件对应的多个路由间切换时触发
-  beforeRouteUpdate(to, from, next) {
-    if (to.params.goods_comment_id) {
-      this.switchData(to.params.goods_comment_id)
-      next()
-    } else {
-      next(new Error('未指定ID'))
+  watch: {
+    goods_comment_id: {
+      handler() {
+        this.getGoodsCommentData()
+      },
+      immediate: true
     }
   },
   methods: {
@@ -72,33 +48,23 @@ export default {
         get_order_goods: {}
       }
     },
-    switchData(id) {
-      // 缓存存在则返回缓存数据
-      if (this.tableBuffer[id]) {
-        this.table = this.tableBuffer[id]
-        return
-      }
-
-      // 否则从服务器上获取数据
-      this.$nextTick(() => {
-        this.table = { ...this.getInitData() }
-        getGoodsCommentItem(id)
-          .then(res => {
-            this.tableBuffer[id] = { ...res.data }
-            this.table = this.tableBuffer[id]
-          })
-      })
+    getGoodsCommentData() {
+      this.table = { ...this.getInitData() }
+      getGoodsCommentItem(this.goods_comment_id)
+        .then(res => {
+          this.table = { ...res.data }
+        })
     },
     addReply(id, data) {
       if (data.type === 1) {
-        this.tableBuffer[id].get_main_reply.push({ ...data })
+        this.table.get_main_reply.push({ ...data })
       }
 
       if (data.type === 3) {
-        this.tableBuffer[id].get_addition_reply.push({ ...data })
+        this.table.get_addition_reply.push({ ...data })
       }
 
-      this.tableBuffer[id].status = 1
+      this.table.status = 1
       this.updateData({
         type: 'set',
         name: 'goods-opinion-comment',

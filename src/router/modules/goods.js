@@ -54,7 +54,7 @@ export default {
       path: 'opinion/consult/detail/:goods_consult_id',
       name: `${pre}opinion-consult-detail`,
       props: true,
-      meta: { ...meta, cache: true, title: '咨询明细' },
+      meta: { ...meta, title: '咨询明细' },
       component: () => import('@/views/goods/consult/detail')
     },
     {
@@ -67,7 +67,7 @@ export default {
       path: 'opinion/comment/detail/:goods_comment_id',
       name: `${pre}opinion-comment-detail`,
       props: true,
-      meta: { ...meta, cache: true, title: '评价明细' },
+      meta: { ...meta, title: '评价明细' },
       component: () => import('@/views/goods/comment/detail')
     },
     {

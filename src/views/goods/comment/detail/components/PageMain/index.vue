@@ -305,8 +305,12 @@ export default {
   },
   data() {
     return {
-      form: {},
-      formBuffer: {},
+      form: {
+        goods_comment_id: undefined,
+        content: undefined,
+        image: undefined,
+        isShowReply: false
+      },
       submitLoading: false,
       srcList: [null],
       rules: {
@@ -342,31 +346,6 @@ export default {
       }
 
       return ''
-    }
-  },
-  watch: {
-    'tableData.goods_comment_id': {
-      handler(val) {
-        if (val > 0) {
-          if (this.formBuffer[val]) {
-            this.form = this.formBuffer[val] || {}
-          } else {
-            this.formBuffer[val] = {
-              goods_comment_id: undefined,
-              content: undefined,
-              image: undefined,
-              isShowReply: false
-            }
-            this.form = this.formBuffer[val]
-          }
-
-          this.$nextTick(() => {
-            if (this.$refs.form) {
-              this.$refs.form.clearValidate()
-            }
-          })
-        }
-      }
     }
   },
   methods: {

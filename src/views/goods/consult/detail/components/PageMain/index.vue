@@ -124,13 +124,14 @@ import { replyGoodsConsultItem } from '@/api/goods/consult'
 export default {
   props: {
     tableData: {
-      default: () => []
+      default: () => {}
     }
   },
   data() {
     return {
-      form: {},
-      formBuffer: {},
+      form: {
+        content: undefined
+      },
       rules: {
         content: [
           {
@@ -167,26 +168,6 @@ export default {
   filters: {
     getPreviewUrl(val) {
       return val ? util.getImageCodeUrl(val, 'head_pic') : ''
-    }
-  },
-  watch: {
-    'tableData.goods_consult_id': {
-      handler(val) {
-        if (val > 0) {
-          if (this.formBuffer[val]) {
-            this.form = this.formBuffer[val] || {}
-          } else {
-            this.formBuffer[val] = { content: undefined }
-            this.form = this.formBuffer[val]
-          }
-
-          this.$nextTick(() => {
-            if (this.$refs.form) {
-              this.$refs.form.clearValidate()
-            }
-          })
-        }
-      }
     }
   },
   methods: {
