@@ -16,6 +16,7 @@
           type="card"
           @tab-click="handleClick"
           @tab-remove="handleTabRemove"
+          @click.middle.native="handleTabMiddle"
           @contextmenu.native="handleContextmenu">
           <el-tab-pane
             v-for="page in opened"
@@ -186,7 +187,29 @@ export default {
      * @param {String} tagName tab 名称
      */
     handleTabRemove(tagName) {
-      this.close({ tagName })
+      if (tagName !== '/index') {
+        this.close({ tagName })
+      }
+    },
+    /**
+     * @description 鼠标中键点击
+     * @param {Object} event 事件
+     */
+    handleTabMiddle(event) {
+      let target = event.target
+      let flag = false
+
+      if (target.className.indexOf('el-tabs__item') > -1) {
+        flag = true
+      } else if (target.parentNode.className.indexOf('el-tabs__item') > -1) {
+        target = target.parentNode
+        flag = true
+      }
+
+      if (flag) {
+        let tagName = target.getAttribute('aria-controls').slice(5)
+        this.handleTabRemove(tagName)
+      }
     }
   }
 }
