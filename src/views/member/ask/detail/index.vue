@@ -24,44 +24,33 @@ export default {
   },
   data() {
     return {
-      // 判断是否路由进入
-      isSourceRoute: false,
-      // 表格数据
-      table: { type: null, status: null }
+      table: this.getInitData()
     }
   },
-  mounted() {
-    if (!this.isSourceRoute) {
-      this.getAskData(this.ask_id)
-    }
-  },
-  // 第一次进入或从其他组件对应路由进入时触发
-  beforeRouteEnter(to, from, next) {
-    if (to.params.ask_id) {
-      next(instance => {
-        instance.getAskData(to.params.ask_id)
-        instance.isSourceRoute = true
-      })
-    } else {
-      next(new Error('未指定ID'))
+  watch: {
+    ask_id: {
+      handler() {
+        this.getAskData()
+      },
+      immediate: true
     }
   },
   methods: {
     ...mapActions('careyshop/update', [
       'updateData'
     ]),
-    getAskData(id) {
-      // id存在表示已获取原始数据
-      if (this.table.ask_id) {
-        return
+    getInitData() {
+      return {
+        type: null,
+        status: null
       }
-
-      this.$nextTick(() => {
-        getAskItem(id)
-          .then(res => {
-            this.table = { ...res.data }
-          })
-      })
+    },
+    getAskData() {
+      this.table = { ...this.getInitData() }
+      getAskItem(this.ask_id)
+        .then(res => {
+          this.table = { ...res.data }
+        })
     },
     addReply(id, data) {
       this.table.status = 1

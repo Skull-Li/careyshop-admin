@@ -60,7 +60,7 @@ export default {
       path: 'ask/detail/:ask_id',
       name: `${pre}ask-detail`,
       props: true,
-      meta: { ...meta, cache: true, title: '问答明细' },
+      meta: { ...meta, title: '问答明细' },
       component: () => import('@/views/member/ask/detail')
     }
   ])('member-')
