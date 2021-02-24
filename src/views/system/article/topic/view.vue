@@ -39,11 +39,7 @@ export default {
     }
   },
   methods: {
-    resetTopicData() {
-      this.topic = {}
-    },
     getTopicData() {
-      this.resetTopicData()
       getTopicItem(this.topic_id)
         .then(res => {
           this.topic = res.data || {}

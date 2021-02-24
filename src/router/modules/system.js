@@ -64,7 +64,7 @@ export default {
       component: () => import('@/views/system/article/topic/create')
     },
     {
-      path: 'topic/update/:topic_id',
+      path: 'topic/update',
       name: `${pre}topic-update`,
       props: true,
       meta: { ...meta, cache: true, title: '编辑专题' },
