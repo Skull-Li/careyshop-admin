@@ -36,6 +36,7 @@ export default {
       formData: {}
     }
   },
+  // 被 keep-alive 缓存的组件激活时调用
   activated() {
     if (!this.article_id) {
       this.$router.push({ name: 'index' })
