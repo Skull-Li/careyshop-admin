@@ -43,6 +43,11 @@
   display: table-cell !important;
 }
 
+// 修复特定分辨率下表格头部(带排序)线条不显示
+.el-table th {
+  position: inherit !important;
+}
+
 button, input, select, textarea {
   font-family: inherit;
   font-size: inherit;
