@@ -42,8 +42,15 @@ export default {
       this.handleClose()
     }
   },
-  mounted() {
-    // this.getArticleData()
+  // 第一次进入或从其他组件对应路由进入时触发
+  beforeRouteEnter(to, from, next) {
+    if (to.params.article_id) {
+      next(instance => {
+        instance.getArticleData()
+      })
+    } else {
+      next()
+    }
   },
   methods: {
     ...mapActions('careyshop/page', [
@@ -56,27 +63,25 @@ export default {
 
       return data
     },
-    // getArticleData() {
-    //   // id存在表示已获取原始数据
-    //   if (this.formData.article_id) {
-    //     return
-    //   }
-    //
-    //   this.$nextTick(() => {
-    //     Promise.all([
-    //       getArticleCatList(null),
-    //       getArticleItem(this.article_id)
-    //     ])
-    //       .then(res => {
-    //         // 处理分类数据
-    //         this.catList = res[0].data || []
-    //         this.catData = util.formatDataToTree(this.catList, 'article_cat_id')
-    //
-    //         // 处理文章数据
-    //         this.formData = this.setArticleData({ ...res[1].data })
-    //       })
-    //   })
-    // },
+    getArticleData() {
+      // id存在表示已获取原始数据
+      if (this.formData.article_id) {
+        return
+      }
+
+      Promise.all([
+        getArticleCatList(null),
+        getArticleItem(this.article_id)
+      ])
+        .then(res => {
+          // 处理分类数据
+          this.catList = res[0].data || []
+          this.catData = util.formatDataToTree(this.catList, 'article_cat_id')
+
+          // 处理文章数据
+          this.formData = this.setArticleData({ ...res[1].data })
+        })
+    },
     // 关闭当前窗口
     handleClose() {
       this.close({
