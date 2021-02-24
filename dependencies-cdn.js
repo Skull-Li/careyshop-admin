@@ -38,8 +38,8 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'element-ui',
       library: 'ELEMENT',
-      js: 'https://cdn.jsdelivr.net/npm/element-ui@2.15.0/lib/index.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/element-ui@2.15.0/lib/theme-chalk/index.css'
+      js: 'https://cdn.jsdelivr.net/npm/element-ui@2.15.1/lib/index.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/element-ui@2.15.1/lib/theme-chalk/index.css'
     },
     {
       name: 'dayjs',
