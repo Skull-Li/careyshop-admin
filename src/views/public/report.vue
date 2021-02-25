@@ -22,7 +22,7 @@ export default {
           for (const value of content.chartData) {
             let script = document.createElement('script')
             script.setAttribute('type', 'text/javascript')
-            script.setAttribute('src', this.$publicPath + value.label)
+            script.setAttribute('src', process.env.BASE_URL + value.label)
             iframe.appendChild(script)
           }
         }
