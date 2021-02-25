@@ -26,6 +26,13 @@ export default {
       meta: { title: '异常错误' },
       component: () => import('@/views/public/50x')
     },
+    {
+      path: 'report/:is_load',
+      name: 'report',
+      props: true,
+      meta: { title: '构建分析' },
+      component: () => import('@/views/public/report')
+    },
     // 系统 前端日志
     {
       path: 'log',

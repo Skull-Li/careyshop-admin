@@ -36,9 +36,9 @@ const frameOut = [
 ]
 
 /**
- * 错误页面
+ * 功能性页面
  */
-const errorPage = [
+const moldPage = [
   {
     path: '*',
     name: '404',
@@ -53,5 +53,5 @@ export const frameInRoutes = frameIn
 export default [
   ...frameIn,
   ...frameOut,
-  ...errorPage
+  ...moldPage
 ]
