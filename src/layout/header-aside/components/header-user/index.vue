@@ -11,6 +11,7 @@
       <el-dropdown-item @click.native="clearHistory" icon="el-icon-time">清空历史</el-dropdown-item>
       <el-dropdown-item v-if="auth.cache" @click.native="clearCache" icon="el-icon-delete">清除缓存</el-dropdown-item>
       <el-dropdown-item v-if="auth.optimize" @click.native="systemOptimize" icon="el-icon-finished">优化系统</el-dropdown-item>
+      <el-dropdown-item v-if="$env === 'development'" @click.native="openReport" icon="el-icon-data-analysis">构建分析</el-dropdown-item>
       <el-dropdown-item v-if="auth.restAPI" @click.native="openRestAPI" icon="el-icon-setting">API 调试</el-dropdown-item>
       <el-dropdown-item divided @click.native="handleCreate" icon="el-icon-key">修改密码</el-dropdown-item>
       <el-dropdown-item v-if="auth.unread" @click.native="handleMessage" icon="el-icon-bell">
@@ -371,6 +372,17 @@ export default {
 
       await this.$router.replace('/refresh')
       this.$message.success('菜单(包括权限)已重新载入')
+    },
+    /**
+     * 打开构建分析
+     */
+    openReport() {
+      this.$router.push({
+        name: 'report',
+        params: {
+          is_load: false
+        }
+      })
     },
     /**
      * 打开Rest API调试

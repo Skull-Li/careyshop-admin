@@ -27,10 +27,10 @@ export default {
       component: () => import('@/views/public/50x')
     },
     {
-      path: 'report/:is_load',
+      path: 'report',
       name: 'report',
       props: true,
-      meta: { title: '构建分析' },
+      meta: { title: '构建分析', cache: true },
       component: () => import('@/views/public/report')
     },
     // 系统 前端日志
