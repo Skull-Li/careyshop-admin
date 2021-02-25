@@ -13,7 +13,7 @@ export default {
     }
   },
   mounted() {
-    if (this.is_load) {
+    if (this.is_load > 0) {
       setTimeout(() => {
         let iframe = this.$el.getElementsByClassName('cs-container-frame')[0]
         let content = iframe.contentWindow
