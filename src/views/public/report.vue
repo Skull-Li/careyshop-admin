@@ -1,5 +1,5 @@
 <template>
-  <cs-container-frame src="report.html"/>
+  <cs-container-frame :src="`${$publicPath}report.html`"/>
 </template>
 
 <script>
@@ -18,12 +18,14 @@ export default {
         let iframe = this.$el.getElementsByClassName('cs-container-frame')[0]
         let content = iframe.contentWindow
 
-        content.chartData.forEach(value => {
-          let script = document.createElement('script')
-          script.setAttribute('type', 'text/javascript')
-          script.setAttribute('src', value.label)
-          iframe.appendChild(script)
-        })
+        if (Array.isArray(content.chartData)) {
+          for (const value of content.chartData) {
+            let script = document.createElement('script')
+            script.setAttribute('type', 'text/javascript')
+            script.setAttribute('src', this.$publicPath + value.label)
+            iframe.appendChild(script)
+          }
+        }
       }, 500)
     }
   }
