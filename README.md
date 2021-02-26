@@ -97,6 +97,12 @@ npm run lint
 
 # 单元测试
 npm run test:unit
+
+# 构建分析
+npm run analyz
+
+# 配置检查
+npm run inspect
 ```
 
 ## 配置

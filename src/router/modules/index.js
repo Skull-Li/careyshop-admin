@@ -11,13 +11,13 @@ export default {
     {
       path: 'index',
       name: 'index',
-      meta: { title: '首页', cache: true, auth: true },
+      meta: { ...meta, cache: true, title: '首页' },
       component: () => import('@/views/index/index')
     },
     {
       path: '401',
       name: 'page401',
-      meta: { title: '权限不足', auth: true },
+      meta: { ...meta, title: '权限不足' },
       component: () => import('@/views/public/401')
     },
     {
@@ -29,8 +29,7 @@ export default {
     {
       path: 'report',
       name: 'report',
-      props: true,
-      meta: { title: '构建分析', cache: true },
+      meta: { cache: true, title: '构建分析' },
       component: () => import('@/views/public/report')
     },
     // 系统 前端日志

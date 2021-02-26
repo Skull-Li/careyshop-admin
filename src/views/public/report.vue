@@ -1,58 +1,69 @@
 <template>
   <cs-container :is-back="false">
-    <iframe class="cs-container-frame" :srcdoc="content" frameborder="0"></iframe>
+    <div v-show="loading" v-loading="loading" class="cs-container-page"></div>
+
+    <iframe v-if="exist" class="cs-container-frame" :srcdoc="content" frameborder="0"/>
+    <div v-else class="cs-container-page">
+      <img src="~@/assets/image/logo@2x.png" alt="report">
+      <p class="page_title">CareyShop构建分析失败</p>
+      <el-button class="cs-mt" @click="handleClose">离开</el-button>
+    </div>
   </cs-container>
 </template>
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'report',
-  props: {
-    is_load: {
-      type: Boolean,
-      required: false,
-      default: true
-    }
-  },
   data() {
     return {
-      content: ''
+      content: '',
+      exist: false,
+      loading: true
     }
   },
-  created() {
+  mounted() {
     axios({
       method: 'get',
       url: process.env.BASE_URL + 'report.html'
     })
       .then(res => {
+        this.exist = true
         this.content = res || ''
-
-        // if (this.is_load) {
-        //   let pos = this.content.indexOf('window.chartData =')
-        //   let chart = this.content.slice(pos + 19)
-        //
-        //   pos = chart.indexOf(';')
-        //   chart = chart.slice(0, pos)
-        //
-        //   const chartData = JSON.parse(chart)
-        //   for (const value of chartData) {
-        //     if (value.label.indexOf('app.') === -1) {
-        //       let script = document.createElement('script')
-        //       script.src = `${process.env.BASE_URL + value.label}`
-        //       document.getElementsByTagName('head')[0].appendChild(script)
-        //     }
-        //   }
-        // }
       })
       .catch(() => {
+        this.exist = false
+        this.content = ''
       })
+      .finally(() => {
+        this.loading = false
+      })
+  },
+  methods: {
+    ...mapActions('careyshop/page', [
+      'close'
+    ]),
+    handleClose() {
+      this.close({
+        tagName: this.$route.fullPath
+      })
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.cs-container-page {
+  height: 100%;
+  @extend %flex-center-col;
+
+  .page_title {
+    font-size: 20px;
+    color: $color-text-main;
+  }
+}
 .cs-container-frame {
   position: absolute;
   top: 0;
