@@ -18,6 +18,10 @@
         <span>{{version}}</span>
       </el-form-item>
 
+      <el-form-item label="版本名称">
+        <span>{{versionName}}</span>
+      </el-form-item>
+
       <el-form-item label="授权域名">
         <span>{{domain}}</span>
       </el-form-item>
@@ -64,6 +68,7 @@ export default {
       loading: false,
       status: 0,
       version: '',
+      versionName: '',
       domain: '',
       service: '',
       authorize: '',
@@ -93,18 +98,19 @@ export default {
 
       this.loading = true
       this.$axios({
-        url: 'https://api.careyshop.cn/api/v1/authorize.html',
+        url: 'https://www.careyshop.cn/api/v1/authorize.html',
         method: 'post',
         headers: { 'Content-Type': 'text/plain; charset=utf-8' },
         data: {
-          domain: document.location.host,
-          version: 'careyshop-admin'
+          domain: document.location.host
+          // version: 'careyshop-admin'
         }
       })
         .then(res => {
           if (res.data) {
             this.status = res.data.status
             this.version = res.data.version
+            this.versionName = res.data.name
             this.domain = res.data.domain
             this.service = res.data.service
             this.authorize = res.data.authorize
