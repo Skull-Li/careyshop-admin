@@ -210,7 +210,8 @@ export default {
       traceFormVisible: false,
       traceForm: {
         delivery_code: undefined,
-        logistic_code: undefined
+        logistic_code: undefined,
+        customer_name: undefined
       }
     }
   },
@@ -300,9 +301,21 @@ export default {
       this.trace()
     },
     // 即时查询
-    trace() {
+    async trace() {
       this.traceData = null
       this.traceLoading = true
+
+      if (this.traceForm.delivery_code === 'SF') {
+        await this.$prompt('请输入顺丰速运收件人或寄件人联系方式后4位数', '查询验证', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消'
+        })
+          .then(({ value }) => {
+            this.traceForm.customer_name = value
+          })
+          .catch(() => {
+          })
+      }
 
       getDeliveryDistTrace(this.traceForm)
         .then(res => {

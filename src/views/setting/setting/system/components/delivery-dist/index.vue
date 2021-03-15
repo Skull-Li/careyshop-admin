@@ -24,6 +24,14 @@
     </el-form-item>
 
     <el-form-item
+      :label="form.is_subscriber.description"
+      prop="is_subscriber">
+      <el-radio v-model="form.is_subscriber.value" :label="0">免费账号</el-radio>
+      <el-radio v-model="form.is_subscriber.value" :label="1">订购账号</el-radio>
+      <div class="help-block" v-html="form.is_subscriber.help_text"></div>
+    </el-form-item>
+
+    <el-form-item
       :label="form.is_sub.description"
       prop="is_sub">
       <el-switch
