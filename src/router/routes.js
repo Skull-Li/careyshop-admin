@@ -42,6 +42,7 @@ const moldPage = [
   {
     path: '*',
     name: '404',
+    meta: { title: '页面不存在' },
     component: () => import('@/views/public/404')
   }
 ]
