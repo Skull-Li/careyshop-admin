@@ -104,7 +104,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'ua-parser-js',
       library: 'UAParser',
-      js: 'https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.24/dist/ua-parser.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.25/dist/ua-parser.min.js',
       css: ''
     },
     {
