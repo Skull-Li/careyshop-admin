@@ -97,6 +97,8 @@ export default {
      * @param {Object} context
      */
     async load({ dispatch }) {
+      // 加载信息
+      util.log.welcome(process.env.VUE_APP_VERSION)
       // DB -> store 加载用户数据
       await dispatch('careyshop/user/load', null, { root: true })
       // DB -> store 加载主题

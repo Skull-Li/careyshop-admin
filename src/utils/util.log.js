@@ -19,6 +19,25 @@ function typeColor(type = 'default') {
 }
 
 /**
+ * @description 打印一个欢迎信息
+ * @param {String} info info text
+ */
+log.welcome = (info) => {
+  console.log(
+    '%cCareyShop',
+    'font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 64px; color: #00bbee; -webkit-text-fill-color: #00bbee; -webkit-text-stroke: 1px #00bbee;'
+  )
+
+  console.log(
+    `%cAdmin-${info} Copyright \xa9 宁波互明科技有限公司 All rights reserved.`,
+    'color: #999999;'
+  )
+
+  console.log('Web https://www.careyshop.cn/')
+  console.log('Doc https://doc.careyshop.cn/')
+}
+
+/**
  * @description 打印一个 [ title | text ] 样式的信息
  * @param {String} title title text
  * @param {String} info info text
@@ -27,9 +46,9 @@ function typeColor(type = 'default') {
 log.capsule = (title, info, type = 'primary') => {
   console.log(
     `%c ${title} %c ${info} %c`,
-    'background:#35495E; padding: 1px; border-radius: 3px 0 0 3px; color: #FFF;',
-    `background:${typeColor(type)}; padding: 1px; border-radius: 0 3px 3px 0;  color: #FFF;`,
-    'background:transparent'
+    'background: #35495E; padding: 1px; border-radius: 3px 0 0 3px; color: #FFF;',
+    `background: ${typeColor(type)}; padding: 1px; border-radius: 0 3px 3px 0;  color: #FFF;`,
+    'background: transparent'
   )
 }
 

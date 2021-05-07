@@ -32,8 +32,6 @@ new Vue({
     this.$store.commit('careyshop/page/init', frameInRoutes)
   },
   mounted() {
-    // 展示系统信息
-    this.$store.commit('careyshop/releases/versionShow')
     // 用户登录后从数据库加载一系列的设置
     this.$store.dispatch('careyshop/account/load').then(() => {})
     // 获取并记录用户 UA
