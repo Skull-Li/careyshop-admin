@@ -99,6 +99,12 @@ export default {
       required: false,
       default: null
     },
+    // 是否返回绝对路径
+    isActual: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     // 目录宽度
     fileWidth: {
       type: String,

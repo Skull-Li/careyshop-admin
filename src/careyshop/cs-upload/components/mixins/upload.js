@@ -140,6 +140,7 @@ export default {
 
       // 本地上传所需要的权限参数
       if (this.token.token.upload_url.module === 'careyshop') {
+        this.params['x:is_actual'] = Number(this.isActual)
         this.params.token = util.cookies.get('token')
         this.params.appkey = this.$baseConfig.APP_KEY
         this.params.timestamp = Math.round(new Date() / 1000) + 100

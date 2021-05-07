@@ -147,8 +147,8 @@
               @command="handleCommand">
               <el-button icon="el-icon-upload"/>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="storage" icon="el-icon-finished">资源选择</el-dropdown-item>
-                <el-dropdown-item command="upload" icon="el-icon-upload2">上传资源</el-dropdown-item>
+                <el-dropdown-item :command="{type: 'storage'}" icon="el-icon-finished">资源选择</el-dropdown-item>
+                <el-dropdown-item :command="{type: 'upload'}" icon="el-icon-upload2">上传资源</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </el-input>
@@ -215,23 +215,6 @@
           @click="update"
           size="small">修改</el-button>
       </div>
-
-      <cs-storage
-        ref="storage"
-        style="display: none;"
-        :limit="1"
-        @confirm="_getStorageFileList">
-      </cs-storage>
-
-      <cs-upload
-        style="display: none;"
-        ref="upload"
-        type="slot"
-        accept="image/*"
-        :limit="1"
-        :multiple="false"
-        @confirm="_getUploadFileList">
-      </cs-upload>
     </el-dialog>
 
     <el-dialog
@@ -248,7 +231,19 @@
           <el-input
             v-model="item.value"
             :placeholder="item.name"
-            :clearable="true"/>
+            :clearable="true">
+            <el-dropdown
+              v-if="index === 'sslcert' || index === 'sslkey'"
+              slot="append"
+              :show-timeout="50"
+              @command="handleCommand">
+              <el-button icon="el-icon-upload"/>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item :command="{type: 'storage-pem', source: index}" icon="el-icon-finished">资源选择</el-dropdown-item>
+                <el-dropdown-item :command="{type: 'upload-pem', source: index}" icon="el-icon-upload2">上传资源</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </el-input>
           <div class="help-block" v-html="item.remark"></div>
         </el-form-item>
       </el-form>
@@ -265,6 +260,24 @@
           size="small">修改</el-button>
       </div>
     </el-dialog>
+
+    <cs-storage
+      ref="storage"
+      style="display: none;"
+      :limit="1"
+      @confirm="_getStorageFileList">
+    </cs-storage>
+
+    <cs-upload
+      style="display: none;"
+      ref="upload"
+      type="slot"
+      :accept="uploadConfig.accept"
+      :limit="1"
+      :multiple="false"
+      :is-actual="uploadConfig.actual"
+      @confirm="_getUploadFileList">
+    </cs-upload>
   </div>
 </template>
 
@@ -303,6 +316,7 @@ export default {
       },
       updateForm: {},
       configForm: {},
+      uploadConfig: {},
       isMap: {
         0: '否',
         1: '是'
@@ -350,18 +364,28 @@ export default {
     },
     // 资源下拉框事件
     handleCommand(command) {
-      switch (command) {
+      switch (command.type) {
         case 'storage':
           this.$refs.storage.handleStorageDlg([0, 2])
           break
 
         case 'upload':
+          this.uploadConfig = { accept: 'image/*', actual: false }
           this.$refs.upload.handleUploadDlg()
+          break
+
+        case 'storage-pem':
+          this.$refs.storage.handleStorageDlg([1, 2], command.source)
+          break
+
+        case 'upload-pem':
+          this.uploadConfig = { accept: '.pem', actual: true }
+          this.$refs.upload.handleUploadDlg(command.source)
           break
       }
     },
     // 获取上传资源
-    _getUploadFileList(files) {
+    _getUploadFileList(files, source) {
       if (!files.length) {
         return
       }
@@ -371,21 +395,28 @@ export default {
         return
       }
 
+      if (source === 'sslcert' || source === 'sslkey') {
+        this.configForm[source].value = response.data[0].path
+        return
+      }
+
       if (response.data[0].type === 0) {
         this.updateForm.image = response.data[0].url
       }
     },
     // 获取选择资源
-    _getStorageFileList(files) {
+    _getStorageFileList(files, source) {
       if (!files.length) {
         return
       }
 
-      for (const value of files) {
-        if (value.type === 0) {
-          this.updateForm.image = value.url
-          break
-        }
+      if (source === 'sslcert' || source === 'sslkey') {
+        this.configForm[source].value = files[0].path
+        return
+      }
+
+      if (files[0].type === 0) {
+        this.updateForm.image = files[0].url
       }
     },
     // 设置排序值

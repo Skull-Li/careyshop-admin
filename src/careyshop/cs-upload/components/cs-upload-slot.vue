@@ -117,6 +117,12 @@ export default {
       type: Number,
       required: false,
       default: null
+    },
+    // 是否返回绝对路径
+    isActual: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data() {
