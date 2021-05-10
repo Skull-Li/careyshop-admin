@@ -13,9 +13,9 @@
     <page-footer
       slot="footer"
       :loading="loading"
-      :current="page.current"
-      :size="page.size"
-      :total="page.total"
+      :page-no="page.page_no"
+      :page-size="page.page_size"
+      :total="pageTotal"
       @change="handlePaginationChange"/>
   </cs-container>
 </template>
@@ -34,12 +34,12 @@ export default {
     return {
       loading: false,
       table: [],
+      pageTotal: 0,
       unread: {},
       type: [],
       page: {
-        current: 1,
-        size: 0,
-        total: 0
+        page_no: 1,
+        page_size: 0
       },
       order: {
         order_type: undefined,
@@ -78,7 +78,7 @@ export default {
           }
         }
 
-        this.page.size = res[1].get('size').value() || 25
+        this.page.page_size = res[1].get('size').value() || 25
       })
       .then(() => {
         this.handleSubmit()
@@ -88,6 +88,10 @@ export default {
     // 分页变化改动
     handlePaginationChange(val) {
       this.page = val
+      if ((val.page_no - 1) * val.page_size > this.pageTotal) {
+        return
+      }
+
       this.$nextTick(() => {
         this.handleSubmit()
       })
@@ -102,11 +106,14 @@ export default {
     // 提交查询请求
     handleSubmit(isRestore = false, isOrder = false) {
       if (isRestore) {
-        this.page.current = 1
+        this.page.page_no = 1
       }
 
       if (isOrder) {
-        this.order = { order_type: undefined, order_field: undefined }
+        this.order = {
+          order_type: undefined,
+          order_field: undefined
+        }
       }
 
       this.loading = true
@@ -114,13 +121,12 @@ export default {
 
       getMessageUserList({
         ...form,
+        ...this.page,
         ...this.order,
-        is_unread: 1,
-        page_no: this.page.current,
-        page_size: this.page.size
+        is_unread: 1
       })
         .then(res => {
-          this.page.total = res.data.total_result
+          this.pageTotal = res.data.total_result
           this.table = res.data.items || []
           this.unread = res.data.unread_count || {}
         })

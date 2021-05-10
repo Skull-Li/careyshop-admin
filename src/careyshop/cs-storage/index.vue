@@ -87,9 +87,9 @@
     <!-- 翻页开始 -->
     <page-footer
       style="margin: 0; padding: 20px 0 0 0;"
-      :current="page.current"
-      :size="page.size"
-      :total="page.total"
+      :page-no="page.page_no"
+      :page-size="page.page_size"
+      :total="pageTotal"
       :is-size="false"
       @change="handlePaginationChange"/>
 
@@ -150,6 +150,7 @@ export default {
       naviData: [],
       checkList: [],
       checkIndex: {},
+      pageTotal: 0,
       currentTableData: [],
       isCheckDirectory: false,
       source: '',
@@ -161,9 +162,8 @@ export default {
         order_field: 'storage_id'
       },
       page: {
-        current: 1,
-        size: 48,
-        total: 0
+        page_no: 1,
+        page_size: 48
       }
     }
   },
@@ -215,13 +215,12 @@ export default {
     handleSubmit() {
       getStorageList({
         ...this.form,
-        type: this.storageType,
-        page_no: this.page.current,
-        page_size: this.page.size
+        ...this.page,
+        type: this.storageType
       })
         .then(res => {
           this.currentTableData = res.data.items || []
-          this.page.total = res.data.total_result
+          this.pageTotal = res.data.total_result
         })
     },
     handleConfirm() {
@@ -247,7 +246,7 @@ export default {
         })
     },
     handleSearch() {
-      this.page.current = 1
+      this.page.page_no = 1
       this.form.storage_id = 0
       this.handleSubmit()
     }

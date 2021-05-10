@@ -14,9 +14,9 @@
     <page-footer
       slot="footer"
       :loading="loading"
-      :current="page.current"
-      :size="page.size"
-      :total="page.total"
+      :page-no="page.page_no"
+      :page-size="page.page_size"
+      :total="pageTotal"
       @change="handlePaginationChange"/>
   </cs-container>
 </template>
@@ -42,12 +42,12 @@ export default {
   data() {
     return {
       table: [],
+      pageTotal: 0,
       loading: false,
       cardData: null,
       page: {
-        current: 1,
-        size: 0,
-        total: 0
+        page_no: 1,
+        page_size: 0
       }
     }
   },
@@ -62,7 +62,7 @@ export default {
 
     Promise.all(request)
       .then(res => {
-        this.page.size = res[0].get('size').value() || 25
+        this.page.page_size = res[0].get('size').value() || 25
         this.cardData = res[1] ? res[1].data : null
       })
       .then(() => {
@@ -73,6 +73,10 @@ export default {
     // 分页变化改动
     handlePaginationChange(val) {
       this.page = val
+      if ((val.page_no - 1) * val.page_size > this.pageTotal) {
+        return
+      }
+
       this.$nextTick(() => {
         this.$refs.header.handleFormSubmit()
       })
@@ -80,19 +84,18 @@ export default {
     // 提交查询请求
     handleSubmit(form, isRestore = false) {
       if (isRestore) {
-        this.page.current = 1
+        this.page.page_no = 1
       }
 
       this.loading = true
       getCardUseList({
         ...form,
-        card_id: this.card_id,
-        page_no: this.page.current,
-        page_size: this.page.size
+        ...this.page,
+        card_id: this.card_id
       })
         .then(res => {
           this.table = res.data.items || []
-          this.page.total = res.data.total_result
+          this.pageTotal = res.data.total_result
         })
         .finally(() => {
           this.loading = false

@@ -19,9 +19,9 @@
     <page-footer
       slot="footer"
       :loading="loading"
-      :current="page.current"
-      :size="page.size"
-      :total="page.total"
+      :page-no="page.page_no"
+      :page-size="page.page_size"
+      :total="pageTotal"
       @change="handlePaginationChange"/>
   </cs-container>
 </template>
@@ -46,13 +46,13 @@ export default {
   data() {
     return {
       table: [],
+      pageTotal: 0,
       loading: false,
       typeList: [],
       selectTypeId: null,
       page: {
-        current: 1,
-        size: 0,
-        total: 0
+        page_no: 1,
+        page_size: 0
       },
       order: {
         order_type: undefined,
@@ -67,7 +67,7 @@ export default {
     ])
       .then(res => {
         this.typeList = res[0].data || []
-        this.page.size = res[1].get('size').value() || 25
+        this.page.page_size = res[1].get('size').value() || 25
       })
       .then(() => {
         this.handleSubmit({ goods_type_id: this.goods_type_id }, true)
@@ -77,7 +77,7 @@ export default {
     // 刷新列表页面
     handleRefresh(isTurning = false) {
       if (isTurning) {
-        !(this.page.current - 1) || this.page.current--
+        !(this.page.page_no - 1) || this.page.page_no--
       }
 
       this.$nextTick(() => {
@@ -87,6 +87,10 @@ export default {
     // 分页变化改动
     handlePaginationChange(val) {
       this.page = val
+      if ((val.page_no - 1) * val.page_size > this.pageTotal) {
+        return
+      }
+
       this.$nextTick(() => {
         this.$refs.header.handleFormSubmit()
       })
@@ -101,7 +105,7 @@ export default {
     // 提交查询请求
     handleSubmit(form, isRestore = false) {
       if (isRestore) {
-        this.page.current = 1
+        this.page.page_no = 1
       }
 
       this.loading = true
@@ -109,13 +113,12 @@ export default {
 
       getGoodsSpecPage({
         ...form,
-        ...this.order,
-        page_no: this.page.current,
-        page_size: this.page.size
+        ...this.page,
+        ...this.order
       })
         .then(res => {
           this.table = res.data.items || []
-          this.page.total = res.data.total_result
+          this.pageTotal = res.data.total_result
         })
         .finally(() => {
           this.loading = false

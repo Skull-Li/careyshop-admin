@@ -1,11 +1,11 @@
 <template>
   <el-pagination
-    :current-page="current"
-    :page-size="size || 25"
+    :current-page="pageNo || 1"
+    :page-size="pageSize || 25"
     :total="total"
     :page-sizes="sizes"
     :disabled="loading"
-    :layout="sizes.includes(size) && isSize ? layout : simple"
+    :layout="sizes.includes(pageSize) && isSize ? layout : simple"
     style="margin: -10px -5px;"
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange">
@@ -18,10 +18,10 @@ import { mapActions } from 'vuex'
 export default {
   name: 'cs-footer',
   props: {
-    current: {
+    pageNo: {
       default: 0
     },
-    size: {
+    pageSize: {
       default: 0
     },
     total: {
@@ -46,22 +46,24 @@ export default {
       'databasePage'
     ]),
     handleSizeChange(val) {
+      if (!this.isSize) {
+        return
+      }
+
       this.databasePage({ user: true })
         .then(res => {
           res.set('size', val).write()
         })
 
       this.$emit('change', {
-        current: this.current,
-        size: val,
-        total: this.total
+        page_no: this.pageNo,
+        page_size: val
       })
     },
     handleCurrentChange(val) {
       this.$emit('change', {
-        current: val,
-        size: this.size,
-        total: this.total
+        page_no: val,
+        page_size: this.pageSize
       })
     }
   }

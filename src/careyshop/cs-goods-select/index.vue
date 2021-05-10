@@ -104,9 +104,9 @@
       <!-- 翻页开始 -->
       <page-footer
         style="margin: 0; padding: 20px 0 0 0;"
-        :current="page.current"
-        :size="page.size"
-        :total="page.total"
+        :page-no="page.page_no"
+        :page-size="page.page_size"
+        :total="pageTotal"
         :is-size="false"
         @change="handlePaginationChange"/>
 
@@ -154,6 +154,7 @@ export default {
       visible: false,
       isCheck: false,
       isSelection: false,
+      pageTotal: 0,
       tableData: [],
       multipleSelection: [],
       form: {
@@ -161,9 +162,8 @@ export default {
         goods_id: undefined
       },
       page: {
-        current: 1,
-        size: 10,
-        total: 0
+        page_no: 1,
+        page_size: 10
       }
     }
   },
@@ -226,7 +226,7 @@ export default {
     },
     handleSubmit(isRefresh = false) {
       if (isRefresh) {
-        this.page.current = 1
+        this.page.page_no = 1
       }
 
       let form = { ...this.form }
@@ -239,12 +239,11 @@ export default {
 
       getGoodsAdminList({
         ...form,
-        page_no: this.page.current,
-        page_size: this.page.size
+        ...this.page
       })
         .then(res => {
           this.tableData = res.data.items || []
-          this.page.total = res.data.total_result
+          this.pageTotal = res.data.total_result
         })
     },
     handleSelectionChange(val) {
