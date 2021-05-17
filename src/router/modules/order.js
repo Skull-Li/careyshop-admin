@@ -50,6 +50,12 @@ export default {
       props: true,
       meta: { ...meta, title: '售后详情' },
       component: () => import('@/views/order/service/info')
+    },
+    {
+      path: 'service/invoice',
+      name: `${pre}service-invoice`,
+      meta: { ...meta, cache: true, title: '开票列表' },
+      component: () => import('@/views/order/invoice')
     }
   ])('order-')
 }
