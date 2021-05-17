@@ -68,7 +68,13 @@ export default {
   },
   methods: {
     // 刷新列表页面
-    handleRefresh(storageId = null, isRestore = false) {
+    handleRefresh(storageId = null, isRestore = false, total = 0) {
+      if (total >= this.page.page_size) {
+        this.page.page_no = Math.ceil((this.pageTotal - total) / this.page.page_size)
+      } else if (total) {
+        !(this.page.page_no - 1) || this.page.page_no--
+      }
+
       this.$nextTick(() => {
         this.$refs.header.form.storage_id = storageId || 0
         this.$refs.header.handleFormSubmit(isRestore)

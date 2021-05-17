@@ -476,7 +476,7 @@ export default {
             .then(() => {
               util.deleteDataList(this.currentTableData, storageId, 'storage_id')
               if (this.currentTableData.length <= 0) {
-                this.$emit('refresh', this.storageId)
+                this.$emit('refresh', this.storageId, false, storageId.length)
               }
 
               this.checkList = []
@@ -564,7 +564,7 @@ export default {
       moveStorageList(this.moveIdList, node.storage_id)
         .then(res => {
           if (res.data.length) {
-            this.$emit('refresh', this.storageId)
+            this.$emit('refresh', this.storageId, false, this.moveIdList.length)
           }
 
           this.checkList = []
