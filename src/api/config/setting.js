@@ -99,3 +99,12 @@ export function setSystemList(data) {
 export function setUploadList(data) {
   return setRequest(data, 'set.upload.list')
 }
+
+/**
+ * 设置通知配置
+ * @param {Object} data
+ * @returns
+ */
+export function setNoticeList(data) {
+  return setRequest(data, 'set.notice.list')
+}

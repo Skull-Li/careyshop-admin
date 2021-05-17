@@ -53,6 +53,13 @@
           name="upload">
           <upload ref="upload"/>
         </el-tab-pane>
+
+        <el-tab-pane
+          v-if="auth.notice"
+          label="通知系统"
+          name="notice">
+          <notice ref="notice"/>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </cs-container>
@@ -67,17 +74,19 @@ import payment from './components/payment'
 import delivery from './components/delivery'
 import deliveryDist from './components/delivery-dist'
 import upload from './components/upload'
+import notice from './components/notice'
 
 export default {
   name: 'setting-setting-system',
   components: {
-    'system-info': systemInfo,
-    'system-shopping': systemShopping,
-    service: service,
-    payment: payment,
-    delivery: delivery,
-    'delivery-dist': deliveryDist,
-    upload: upload
+    systemInfo,
+    systemShopping,
+    service,
+    payment,
+    delivery,
+    deliveryDist,
+    upload,
+    notice
   },
   data() {
     return {
@@ -89,7 +98,8 @@ export default {
         payment: false,
         delivery: false,
         dist: false,
-        upload: false
+        upload: false,
+        notice: false
       }
     }
   },
@@ -100,6 +110,11 @@ export default {
   methods: {
     // 验证权限(必须反方向验证)
     validationAuth() {
+      if (this.$permission('/setting/setting/system/notice')) {
+        this.auth.notice = true
+        this.activeName = 'notice'
+      }
+
       if (this.$permission('/setting/setting/system/upload')) {
         this.auth.upload = true
         this.activeName = 'upload'
