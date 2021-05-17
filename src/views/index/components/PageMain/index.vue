@@ -253,10 +253,10 @@ export default {
       },
       orderStatus: {},
       linkData: [
-        { name: '官方主页', url: 'careyshop.cn' },
-        { name: '文档中心', url: 'doc.careyshop.cn' },
-        { name: 'Github', url: 'github.com/dnyz520/careyshop' },
-        { name: 'Gitee', url: 'gitee.com/careyshop/careyshop' }
+        { name: '官方主页', url: 'www.careyshop.cn' },
+        { name: '开发文档', url: 'doc.careyshop.cn' },
+        { name: '使用协议', url: 'www.careyshop.cn/pricing/license.html' },
+        { name: '商用授权', url: 'www.careyshop.cn/pricing.html' }
       ]
     }
   },

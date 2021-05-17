@@ -717,7 +717,7 @@ export default {
         replace: false
       }
 
-      this.$refs.upload.handleUploadDlg()
+      this.$refs.upload.handleUpload()
     },
     // 替换资源
     handleReplace(index) {
@@ -731,7 +731,7 @@ export default {
       }
 
       this.$refs.upload.setReplaceId(storage.storage_id)
-      this.$refs.upload.handleUploadDlg()
+      this.$refs.upload.handleUpload()
     },
     // 选择视频海报
     handleVideoCover(files) {

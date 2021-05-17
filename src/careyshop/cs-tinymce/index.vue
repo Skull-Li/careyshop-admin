@@ -142,7 +142,7 @@ export default {
             tooltip: '从本地上传资源',
             icon: 'template',
             onclick: () => {
-              self.$refs.upload.handleUploadDlg()
+              self.$refs.upload.handleUpload()
             }
           })
           // 资源管理选取

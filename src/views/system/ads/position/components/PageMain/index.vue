@@ -292,7 +292,7 @@
                 tabindex="0"
                 style="margin-bottom: 8px;"
                 class="el-upload el-upload--picture-card"
-                @click="$refs.upload.handleUploadDlg()">
+                @click="$refs.upload.handleUpload()">
                 <i class="el-icon-plus"/>
               </div>
             </template>
@@ -305,7 +305,7 @@
 
           <el-button
             icon="el-icon-upload2"
-            @click="$refs.upload.handleUploadDlg()"
+            @click="$refs.upload.handleUpload()"
             size="small">上传图片</el-button>
         </el-form-item>
 

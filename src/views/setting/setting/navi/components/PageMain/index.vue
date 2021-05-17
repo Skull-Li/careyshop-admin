@@ -492,7 +492,7 @@ export default {
           break
 
         case 'upload':
-          this.$refs.upload.handleUploadDlg()
+          this.$refs.upload.handleUpload()
           break
       }
     },

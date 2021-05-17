@@ -371,7 +371,7 @@ export default {
 
         case 'upload':
           this.uploadConfig = { accept: 'image/*', actual: false }
-          this.$refs.upload.handleUploadDlg()
+          this.$refs.upload.handleUpload()
           break
 
         case 'storage-pem':
@@ -380,7 +380,7 @@ export default {
 
         case 'upload-pem':
           this.uploadConfig = { accept: '.pem', actual: true }
-          this.$refs.upload.handleUploadDlg(command.source)
+          this.$refs.upload.handleUpload(command.source)
           break
       }
     },

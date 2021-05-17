@@ -1394,7 +1394,7 @@ export default {
 
       this.uploadCallback = callback
       this.$nextTick(() => {
-        this.$refs.upload.handleUploadDlg(source)
+        this.$refs.upload.handleUpload(source)
       })
     },
     // 筛选过滤选择的资源
