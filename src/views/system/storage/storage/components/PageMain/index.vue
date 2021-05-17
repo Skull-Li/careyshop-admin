@@ -479,6 +479,7 @@ export default {
                 this.$emit('refresh', this.storageId)
               }
 
+              this.checkList = []
               this.directoryList = []
               this.$message.success('操作成功')
             })
