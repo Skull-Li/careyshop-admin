@@ -71,15 +71,31 @@ export default {
     },
     // 资源预览
     handlePreview(file) {
-      if (file.status === 'success') {
-        const response = file.response.data
-        if (response.length && response[0].type === 0) {
-          this.$preview(response[0].url)
-          return
-        }
+      if (file.status !== 'success') {
+        return
       }
 
-      this.$message.warning('当前模式或资源不支持预览')
+      const data = {
+        type: file.response ? file.response.data[0].type : file.type,
+        url: file.response ? file.response.data[0].url : file.url
+      }
+
+      if (data.type === 0) {
+        this.$preview(data.url)
+        return
+      }
+
+      this.$confirm('当前模式或资源不支持预览，是否新开窗口打开?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        closeOnClickModal: false,
+        type: 'warning'
+      })
+        .then(() => {
+          this.$open(data.url)
+        })
+        .catch(() => {
+        })
     },
     // 上传文件之前的钩子
     handleBeforeUpload(file) {

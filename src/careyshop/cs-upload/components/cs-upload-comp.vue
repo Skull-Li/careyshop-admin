@@ -11,22 +11,24 @@
       :accept="accept"
       :limit="limit"
       :auto-upload="autoUpload"
+      :disabled="disabled"
       :on-preview="handlePreview"
       :on-remove="handleRemove"
       :before-upload="handleBeforeUpload"
       :on-success="handleSuccess"
       :on-error="handleError"
       :on-exceed="handleExceed">
-      <i class="el-icon-plus"/>
-      <div slot="tip" class="el-upload__tip">{{uploadTip}}大小不能超过 {{this.token['file_size']}}</div>
+        <i v-if="listType === 'picture-card'" class="el-icon-plus"/>
+        <el-button v-else size="small" icon="el-icon-upload2" :disabled="disabled">点击上传</el-button>
+        <div v-if="!disabled" slot="tip" class="el-upload__tip">{{uploadTip}}大小不能超过 {{this.token['file_size']}}</div>
     </el-upload>
 
     <el-cascader
-      v-if="storageId == null"
+      v-if="storageId == null && !disabled"
       v-model="parentId"
       :options="parentData"
       :props="parentProps"
-      :style="`width: ${fileWidth}`"
+      :style="`width: ${fileWidth}; padding-top: 10px;`"
       filterable>
     </el-cascader>
   </div>
@@ -43,7 +45,7 @@ export default {
     uploadTip: {
       type: String,
       required: false,
-      default: '请选择图片进行上传，'
+      default: '请选择资源进行上传，'
     },
     // 文件列表的类型
     listType: {
@@ -55,7 +57,7 @@ export default {
     multiple: {
       type: Boolean,
       required: false,
-      default: false
+      default: true
     },
     // 是否显示已上传列表
     showFileList: {
@@ -109,12 +111,20 @@ export default {
     fileWidth: {
       type: String,
       required: false,
-      default: '30%'
+      default: '100%'
+    },
+    // 是否禁用
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   mounted() {
-    this.getDirectory()
-    this.getToken()
+    if (!this.disabled) {
+      this.getDirectory()
+      this.getToken()
+    }
   }
 }
 </script>

@@ -72,7 +72,7 @@ export default {
           on: {
             upload: file => {
               if (this.type === 'comp') {
-                this.$emit('input', this.getUploadData(file))
+                this.$emit('input', file)
               }
 
               if (this.type === 'slot') {
@@ -91,29 +91,12 @@ export default {
     )
   },
   methods: {
-    getUploadData(fileList) {
-      let data = []
-      fileList.forEach(val => {
-        if (val.response) {
-          data.push({
-            name: val.response.data[0].name,
-            source: val.response.data[0].url
-          })
-        } else {
-          data.push({
-            name: val.name,
-            source: val.source
-          })
-        }
-      })
-
-      return data
-    },
-    handleUploadDlg(source = '') {
+    handleUpload(source = '') {
       if (this.type === 'slot') {
         this.$refs.upload.visible = true
-        this.source = source
       }
+
+      this.source = source
     },
     setReplaceId(val) {
       this.$refs.upload.replaceId = val
