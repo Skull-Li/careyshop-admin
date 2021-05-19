@@ -4,7 +4,10 @@
       :inline="true"
       size="small">
       <el-form-item>
-        <el-radio-group v-model="form.is_read" :disabled="loading">
+        <el-radio-group
+          v-model="isRead"
+          :disabled="loading"
+          @change="$emit('submit')">
           <el-radio-button :label="null">全部</el-radio-button>
           <el-radio-button label="0">未读</el-radio-button>
           <el-radio-button label="1">已读</el-radio-button>
@@ -60,15 +63,16 @@
 
     <el-tabs
       v-model="tabPane"
-      class="tab-box">
+      class="tab-box"
+      @tab-click="tab => {$emit('tabs', tab.name)}">
       <el-tab-pane
         v-for="(item, index) in typeData"
         :key="index"
-        :label="item | getTabPaneName(unreadData)"
-        :name="index.toString()">
+        :name="item.value"
+        :label="item | getTabPaneName(unreadData)">
 
         <el-table
-          v-if="index.toString() === tabPane"
+          v-if="item.value === tabPane"
           :data="currentTableData"
           :highlight-current-row="true"
           @selection-change="handleSelectionChange"
@@ -158,14 +162,11 @@ export default {
   },
   data() {
     return {
-      tabPane: '0',
+      isRead: null,
+      tabPane: 'total',
       typeList: {},
       currentTableData: [],
       multipleSelection: [],
-      form: {
-        type: null,
-        is_read: null
-      },
       auth: {
         read: false,
         read_all: false,
@@ -182,23 +183,6 @@ export default {
         this.multipleSelection = []
       },
       immediate: true
-    },
-    'form.is_read': {
-      handler(val) {
-        this.form.is_read = val
-        this.$emit('submit', true)
-      }
-    },
-    tabPane: {
-      handler(index) {
-        if (!Object.prototype.hasOwnProperty.call(this.typeData, index)) {
-          return
-        }
-
-        const tabType = this.typeData[index]
-        this.form.type = tabType.value !== 'total' ? tabType.value : null
-        this.$emit('submit', true, true)
-      }
     }
   },
   filters: {
@@ -343,7 +327,7 @@ export default {
         .then(() => {
           delMessageUserList(messageId)
             .then(() => {
-              this.$emit('submit', true)
+              this.$emit('submit')
               this.$message.success('操作成功')
             })
         })
@@ -361,7 +345,7 @@ export default {
         .then(() => {
           delMessageUserAll()
             .then(() => {
-              this.$emit('submit', true)
+              this.$emit('submit')
               this.$message.success('操作成功')
             })
         })

@@ -61,6 +61,6 @@
     "sass-loader": "^10.1.1",
     "svg-sprite-loader": "^5.2.1",
     "vue-template-compiler": "^2.6.12",
-    "webpack-bundle-analyzer": "^4.4.1"
+    "webpack-bundle-analyzer": "^4.4.2"
   }
 }

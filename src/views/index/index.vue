@@ -47,7 +47,7 @@ export default {
   },
   mounted() {
     if (util.cookies.get('license') !== 'yes') {
-      if (process.env.VUE_APP_ISDEMO === 'true') {
+      if (process.env.VUE_APP_ISDEMO === 'true' || process.env.NODE_ENV === 'development') {
         return
       }
 

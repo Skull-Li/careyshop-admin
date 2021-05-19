@@ -5,7 +5,8 @@
       :loading="loading"
       :table-data="table"
       :unread-data="unread"
-      :type-data="type"
+      :type-data="typeData"
+      @tabs="handleTabs"
       @sort="handleSort"
       @minus="minusUnread"
       @submit="handleSubmit"/>
@@ -36,7 +37,8 @@ export default {
       table: [],
       pageTotal: 0,
       unread: {},
-      type: [],
+      type: null,
+      typeData: [],
       page: {
         page_no: 1,
         page_size: 0
@@ -60,7 +62,7 @@ export default {
       this.$store.dispatch('careyshop/db/databasePage', { user: true })
     ])
       .then(res => {
-        this.type.unshift({
+        this.typeData.unshift({
           name: '全部消息',
           value: 'total'
         })
@@ -71,7 +73,7 @@ export default {
               continue
             }
 
-            this.type.push({
+            this.typeData.push({
               name: res[0][index],
               value: index
             })
@@ -93,6 +95,15 @@ export default {
       }
 
       this.$nextTick(() => {
+        this.handleSubmit(false)
+      })
+    },
+    // 标签页切换
+    handleTabs(val) {
+      this.type = val !== 'total' ? val : null
+      this.order = {}
+
+      this.$nextTick(() => {
         this.handleSubmit()
       })
     },
@@ -104,26 +115,18 @@ export default {
       })
     },
     // 提交查询请求
-    handleSubmit(isRestore = false, isOrder = false) {
+    handleSubmit(isRestore = true) {
       if (isRestore) {
         this.page.page_no = 1
       }
 
-      if (isOrder) {
-        this.order = {
-          order_type: undefined,
-          order_field: undefined
-        }
-      }
-
       this.loading = true
-      const form = this.$refs.main ? this.$refs.main.form : {}
-
       getMessageUserList({
-        ...form,
+        is_unread: 1,
+        type: this.type,
+        is_read: this.$refs.main ? this.$refs.main.isRead : null,
         ...this.page,
-        ...this.order,
-        is_unread: 1
+        ...this.order
       })
         .then(res => {
           this.pageTotal = res.data.total_result

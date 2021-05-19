@@ -99,6 +99,7 @@ export default {
     handleTabs(val) {
       this.tabs = val
       this.order = {}
+
       this.$nextTick(() => {
         this.$refs.header.handleFormSubmit(true)
       })
