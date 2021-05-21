@@ -60,12 +60,12 @@ export default {
       meta: { ...meta, cache: true, title: '前台导航' },
       component: () => import('@/views/setting/setting/navi')
     },
-    // {
-    //   path: 'setting/template',
-    //   name: `${pre}setting-template`,
-    //   meta: { ...meta, cache: true, title: '消息模板' },
-    //   component: () => import('@/views/setting/setting/template')
-    // },
+    {
+      path: 'setting/notice',
+      name: `${pre}setting-notice`,
+      meta: { ...meta, cache: true, title: '通知模板' },
+      component: () => import('@/views/setting/setting/notice')
+    },
     {
       path: 'payment/config',
       name: `${pre}payment-config`,
