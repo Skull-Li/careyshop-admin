@@ -33,6 +33,13 @@ export default {
       component: () => import('@/views/member/user/address')
     },
     {
+      path: 'user/invoice/:client_id',
+      name: `${pre}user-invoice`,
+      props: true,
+      meta: { ...meta, title: '开票信息' },
+      component: () => import('@/views/member/user/invoice')
+    },
+    {
       path: 'user/level',
       name: `${pre}user-level`,
       meta: { ...meta, cache: true, title: '账号等级' },

@@ -279,6 +279,12 @@
               </el-dropdown-item>
 
               <el-dropdown-item
+                v-if="auth.invoice"
+                @click.native="handleInvoice(scope.row.user_id)">
+                开票信息
+              </el-dropdown-item>
+
+              <el-dropdown-item
                 v-if="auth.money"
                 @click.native="handleMoney(scope.$index)"
                 divided>
@@ -623,6 +629,7 @@ export default {
         reset: false,
         withdraw: false,
         address: false,
+        invoice: false,
         money: false,
         finance: false
       },
@@ -823,6 +830,7 @@ export default {
       this.auth.reset = this.$permission('/member/user/client/reset')
       this.auth.withdraw = this.$permission('/member/user/client/withdraw')
       this.auth.address = this.$permission('/member/user/client/address')
+      this.auth.invoice = this.$permission('/member/user/client/invoice')
       this.auth.money = this.$permission('/member/user/client/money')
       this.auth.finance = this.$permission('/member/user/client/finance')
     },
@@ -1131,6 +1139,15 @@ export default {
     handleAddress(user_id) {
       this.$router.push({
         name: 'member-user-address',
+        params: {
+          client_id: user_id
+        }
+      })
+    },
+    // 开票信息
+    handleInvoice(user_id) {
+      this.$router.push({
+        name: 'member-user-invoice',
         params: {
           client_id: user_id
         }
