@@ -2,8 +2,8 @@
   <el-dropdown class="cs-mr" :show-timeout="50">
     <span class="btn-text">
       <el-badge :hidden="!unreadMessage" :value="unreadMessage" :max="99">
-        <span>{{info.name ? '您好 ' : '未登录'}}</span>
-        <span style="color: #409EFF;">{{info.name}}</span>
+        {{info.name ? '您好' : '未登录'}}
+        <span class="username">{{info.name}}</span>
       </el-badge>
     </span>
     <el-dropdown-menu slot="dropdown">
