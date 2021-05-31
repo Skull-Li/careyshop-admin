@@ -28,8 +28,8 @@ export default {
       options: [
         { label: '默认', value: 'default' },
         { label: '中等', value: 'medium' },
-        { label: '较小', value: 'small' },
-        { label: '最小', value: 'mini' }
+        { label: '小型', value: 'small' },
+        { label: '超小', value: 'mini' }
       ]
     }
   },
