@@ -8,13 +8,13 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'vue',
       library: 'Vue',
-      js: 'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js',
       css: ''
     },
     {
       name: 'vue-router',
       library: 'VueRouter',
-      js: 'https://cdn.jsdelivr.net/npm/vue-router@3.5.1/dist/vue-router.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/vue-router@3.5.2/dist/vue-router.min.js',
       css: ''
     },
     {
@@ -32,19 +32,19 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'better-scroll',
       library: 'BetterScroll',
-      js: 'https://cdn.jsdelivr.net/npm/better-scroll@2.3.1/dist/better-scroll.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/better-scroll@2.4.1/dist/better-scroll.min.js',
       css: ''
     },
     {
       name: 'element-ui',
       library: 'ELEMENT',
-      js: 'https://cdn.jsdelivr.net/npm/element-ui@2.15.2/lib/index.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/element-ui@2.15.2/lib/theme-chalk/index.css'
+      js: 'https://cdn.jsdelivr.net/npm/element-ui@2.15.3/lib/index.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/element-ui@2.15.3/lib/theme-chalk/index.css'
     },
     {
       name: 'dayjs',
       library: 'dayjs',
-      js: 'https://cdn.jsdelivr.net/npm/dayjs@1.10.5/dayjs.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/dayjs@1.10.6/dayjs.min.js',
       css: ''
     },
     {
@@ -56,7 +56,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'hotkeys-js',
       library: 'hotkeys',
-      js: 'https://cdn.jsdelivr.net/npm/hotkeys-js@3.8.5/dist/hotkeys.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/hotkeys-js@3.8.7/dist/hotkeys.min.js',
       css: ''
     },
     {
@@ -110,7 +110,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'js-cookie',
       library: 'Cookies',
-      js: 'https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js',
       css: ''
     },
     {
