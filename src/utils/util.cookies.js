@@ -1,3 +1,4 @@
+import { merge } from 'lodash'
 import Cookies from 'js-cookie'
 
 const cookies = {}
@@ -10,7 +11,7 @@ const cookies = {}
  */
 cookies.set = (name = 'default', value = '', cookieSetting = {}) => {
   let currentCookieSetting = { expires: null }
-  Object.assign(currentCookieSetting, cookieSetting)
+  merge(currentCookieSetting, cookieSetting)
   Cookies.set(`careyshop-${process.env.VUE_APP_VERSION}-${name}`, value, currentCookieSetting)
 }
 
