@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'cs-header-size',
@@ -27,16 +27,13 @@ export default {
     return {
       options: [
         { label: '默认', value: 'default' },
-        { label: '中', value: 'medium' },
-        { label: '小', value: 'small' },
-        { label: '最小', value: 'mini' }
+        { label: '中等', value: 'medium' },
+        { label: '小型', value: 'small' },
+        { label: '超小', value: 'mini' }
       ]
     }
   },
   methods: {
-    ...mapMutations({
-      pageKeepAliveClean: 'careyshop/page/keepAliveClean'
-    }),
     ...mapActions({
       sizeSet: 'careyshop/size/set'
     }),

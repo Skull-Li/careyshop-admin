@@ -41,6 +41,8 @@ $theme-header-item-background-color-focus: rgba(#B1B1B1, .2);
 // 顶栏上的项目在 active 时
 $theme-header-item-color-active: #FFF;
 $theme-header-item-background-color-active: rgba(#B1B1B1, .3);
+// 顶栏上的用户名文字颜色
+$theme-header-item-username: $color-warning;
 
 // 侧边栏上的文字颜色
 $theme-aside-item-color: #FFF;

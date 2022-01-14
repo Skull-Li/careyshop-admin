@@ -53,6 +53,7 @@ module.exports = {
   configureWebpack: config => {
     const configNew = {}
     if (process.env.NODE_ENV === 'production') {
+      configNew.output = require('./src/plugin/project')
       configNew.externals = externals
       configNew.plugins = [
         // gzip
@@ -64,12 +65,6 @@ module.exports = {
           deleteOriginalAssets: false
         })
       ]
-
-      const projectName = '\x63\x61\x72\x65\x79\x73\x68\x6f\x70'
-      configNew.output = {
-        filename: `js/[name].[contenthash:8].${projectName}.js`,
-        chunkFilename: `js/[name].[contenthash:8].${projectName}.js`
-      }
     }
 
     return configNew

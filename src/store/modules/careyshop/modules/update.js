@@ -1,3 +1,5 @@
+import { merge } from 'lodash'
+
 export default {
   namespaced: true,
   state: {
@@ -17,7 +19,7 @@ export default {
 
       state.list[data.name].push({
         type: 'add',
-        data: Object.assign({}, data.data)
+        data: merge({}, data.data)
       })
     },
     /**
@@ -33,7 +35,7 @@ export default {
       state.list[data.name].push({
         type: 'set',
         idx: data.srcId,
-        data: Object.assign({}, data.data)
+        data: merge({}, data.data)
       })
     },
     /**

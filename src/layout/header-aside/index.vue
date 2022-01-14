@@ -33,7 +33,7 @@
         <!-- 顶栏右侧 -->
         <div class="cs-header-right" flex-box="0">
           <!-- 如果你只想在开发环境显示这个按钮请添加 v-if="$env === 'development'" -->
-          <cs-header-log v-if="$env === 'development'"/>
+          <cs-header-log v-if="$env === 'development' && (logLength || logLengthError)"/>
           <cs-header-search @click="handleSearchClick"/>
           <cs-header-fullscreen/>
           <cs-header-theme/>
@@ -134,7 +134,9 @@ export default {
       uaData: state => state.ua.data
     }),
     ...mapGetters('careyshop', {
-      themeActiveSetting: 'theme/activeSetting'
+      themeActiveSetting: 'theme/activeSetting',
+      logLength: 'log/length',
+      logLengthError: 'log/lengthError'
     }),
     /**
      * @description 用来实现带参路由的缓存
