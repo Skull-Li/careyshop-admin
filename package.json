@@ -1,6 +1,6 @@
 {
   "name": "careyshop-admin",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
@@ -14,7 +14,7 @@
     "@careyshop/stats": "^1.0.14",
     "@careyshop/vue-print": "^1.0.14",
     "@careyshop/vue-table-export": "^1.0.21",
-    "axios": "^0.25.0",
+    "axios": "^0.24.0",
     "better-scroll": "^2.4.2",
     "clipboard-polyfill": "^3.0.3",
     "core-js": "^3.21.0",
