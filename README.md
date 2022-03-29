@@ -5,21 +5,6 @@
 <h1 align="center">CareyShop 商城后台管理系统</h1>
 
 <p align="center">
-    <a href="https://www.careyshop.cn">
-        <img src="https://img.shields.io/badge/website-CareyShop-yellow.svg"  alt="careyshop"/>
-    </a>
-    <a href="https://www.careyshop.cn">
-        <img src="https://img.shields.io/github/license/dnyz520/careyshop-admin.svg"  alt="careyshop_license"/>
-    </a>
-    <a href="https://www.careyshop.cn/download.html">
-        <img src="https://img.shields.io/github/release/dnyz520/careyshop-admin.svg"  alt="careyshop_release"/>
-    </a>
-    <a href="https://www.careyshop.cn">
-        <img src="https://img.shields.io/github/last-commit/dnyz520/careyshop-admin.svg"  alt="careyshop_last-commit"/>
-    </a>
-</p>
-
-<p align="center">
     <b>如果对您有帮助，请帮忙点右上角 "Star" 支持一下 谢谢！</b>
 </p>
 
@@ -38,11 +23,6 @@ CareyShop（简称 CS）是一套基于 ThinkPHP6.0 框架开发的高性能开�
 
 ## 预览
 [后台 Demo 预览](https://demo.careyshop.cn/admin "后台 Demo 预览") | [RestAPI 接口调试](https://demo.careyshop.cn/api "RestAPI 接口调试") | [经典配套款](https://doc.careyshop.cn/guide/white/) | [深灰商务款](https://doc.careyshop.cn/guide/gray/)
-
-## 仓库
-[Github 仓库](https://github.com/dnyz520/careyshop-admin "Github 仓库") | [码云仓库](https://gitee.com/careyshop/careyshop-admin "码云仓库") | [Coding 仓库](https://careyshop.coding.net/public/careyshop-admin/careyshop-admin/git "Coding 仓库")
-
-CareyShop 商城框架系统 [Github 仓库](https://github.com/dnyz520/careyshop "Github 仓库") | [码云仓库](https://gitee.com/careyshop/careyshop "码云仓库") | [Coding 仓库](https://careyshop.coding.net/public/careyshop/careyshop/git "Coding 仓库")
 
 ## 准备
 在您使用本项目前，请先安装好 [node](https://nodejs.org "node")。项目技术栈基于 [es2015+](http://es6.ruanyifeng.com/ "es2015+")、[vue](https://cn.vuejs.org/ "vue")、[vuex](https://vuex.vuejs.org/ "vuex")、[vue-router](https://router.vuejs.org/ "vue-router") 、[vue-cli4](https://cli.vuejs.org/ "vue-cli") 、[axios](https://github.com/axios/axios "axios") 和 [element-ui](https://element.eleme.io/ "element-ui")，所有的请求数据都基于 rest 协议。
@@ -70,7 +50,7 @@ npm install -g @vue/cli
 
 ### 克隆项目
 ```shell
-git clone https://github.com/dnyz520/careyshop-admin.git
+git clone xxx(xxx替换成第三方git镜像地址)
 ```
 
 ### 安装依赖
@@ -108,7 +88,7 @@ npm run inspect
 之后将配置修改为您的环境，具体配置如下：
 ```js
 const serverConfig = {
-  BASE_API: '//careyshop.cn/api',                   // API 接口访问地址
+  BASE_API: '/api',                                 // API 接口访问地址
   APP_KEY: '86757125',                              // 后端获取的 App应用 钥匙
   APP_SECRET: 'ea1bd533d001fd73b09944f04c96a6fc'    // 后端获取的 App应用 密钥
 }
