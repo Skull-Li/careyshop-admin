@@ -119,7 +119,7 @@ const serverConfig = {
 ![](https://aliyun.oss.careyshop.cn/poster/gray/%E7%BC%A9%E7%95%A5%E5%9B%BE%E8%AE%BE%E8%AE%A1-%E7%81%B0.png)
 
 #### 声明
-CareyShop® 商标和著作权所有者为宁波互明科技有限公司。
+版权归宁波互明科技有限公司所有
 
 #### 鸣谢
 <a href="https://github.com/d2-projects/d2-admin" target="_blank"><img src="https://doc.careyshop.cn/assets/img/d2-admin@2x.png" width="200"></a>
