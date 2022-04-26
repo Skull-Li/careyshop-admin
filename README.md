@@ -5,31 +5,16 @@
 <h1 align="center">CareyShop 商城后台管理系统</h1>
 
 <p align="center">
-    <a href="https://www.careyshop.cn">
-        <img src="https://img.shields.io/badge/website-CareyShop-yellow.svg"  alt="careyshop"/>
-    </a>
-    <a href="https://www.careyshop.cn">
-        <img src="https://img.shields.io/github/license/dnyz520/careyshop-admin.svg"  alt="careyshop_license"/>
-    </a>
-    <a href="https://www.careyshop.cn/download.html">
-        <img src="https://img.shields.io/github/release/dnyz520/careyshop-admin.svg"  alt="careyshop_release"/>
-    </a>
-    <a href="https://www.careyshop.cn">
-        <img src="https://img.shields.io/github/last-commit/dnyz520/careyshop-admin.svg"  alt="careyshop_last-commit"/>
-    </a>
-</p>
-
-<p align="center">
     <b>如果对您有帮助，请帮忙点右上角 "Star" 支持一下 谢谢！</b>
 </p>
 
 ## 介绍
-CareyShop（简称 CS）是一套基于 ThinkPHP6.0 框架开发的高性能开源商城框架系统，秉承极简、极速、极致的开发理念，采用前后端分离，支持分布式部署。框架内部使用面向对象模块化调用，在多个终端、跨平台时采用 REST API 进行数据交互，可直接对接 PC、移动设备、小程序、云部署，构建 Android、IOS 的 APP。
+CareyShop（简称 CS）是一套基于 ThinkPHP6 框架开发的高性能开源商城框架系统，秉承极简、极速、极致的开发理念，采用前后端分离，支持分布式部署。框架内部使用面向对象模块化调用，在多终端、跨平台时采用 REST API 进行数据交互，可直接对接 PC、移动设备、小程序、云部署，构建 Android、IOS 的 APP。
 
 **严正声明：**   
 **为配合国家打击跨境赌博、电信诈骗、断卡等行动，本源码仅限中国大陆地区使用，且！使用站点必须有ICP备案与网安备案，否则一律上报至公安机关！**
 
-**CareyShop（QQ）交流群：714593455**
+**CareyShop（QQ）交流1群：714593455 交流2群：817814861**
 
 ## 前言
 放眼移动热潮、新零售概念、各类<abbr title="泛指各类终端机器或各类平台，终端机有IOS与Android为代表，平台以“微信小程序”为代表">终端</abbr>的增多，服务端会与各类前端进行交互，和第三方相互协作也更加紧密、频繁。出于这样的整体环境，我们摒弃传统开发方向，直接以 REST API 架构为基础，将各类业务处理层模块化。
@@ -38,11 +23,6 @@ CareyShop（简称 CS）是一套基于 ThinkPHP6.0 框架开发的高性能开�
 
 ## 预览
 [后台 Demo 预览](https://demo.careyshop.cn/admin "后台 Demo 预览") | [RestAPI 接口调试](https://demo.careyshop.cn/api "RestAPI 接口调试") | [经典配套款](https://doc.careyshop.cn/guide/white/) | [深灰商务款](https://doc.careyshop.cn/guide/gray/)
-
-## 仓库
-[Github 仓库](https://github.com/dnyz520/careyshop-admin "Github 仓库") | [码云仓库](https://gitee.com/careyshop/careyshop-admin "码云仓库") | [Coding 仓库](https://careyshop.coding.net/public/careyshop-admin/careyshop-admin/git "Coding 仓库")
-
-CareyShop 商城框架系统 [Github 仓库](https://github.com/dnyz520/careyshop "Github 仓库") | [码云仓库](https://gitee.com/careyshop/careyshop "码云仓库") | [Coding 仓库](https://careyshop.coding.net/public/careyshop/careyshop/git "Coding 仓库")
 
 ## 准备
 在您使用本项目前，请先安装好 [node](https://nodejs.org "node")。项目技术栈基于 [es2015+](http://es6.ruanyifeng.com/ "es2015+")、[vue](https://cn.vuejs.org/ "vue")、[vuex](https://vuex.vuejs.org/ "vuex")、[vue-router](https://router.vuejs.org/ "vue-router") 、[vue-cli4](https://cli.vuejs.org/ "vue-cli") 、[axios](https://github.com/axios/axios "axios") 和 [element-ui](https://element.eleme.io/ "element-ui")，所有的请求数据都基于 rest 协议。
@@ -70,7 +50,7 @@ npm install -g @vue/cli
 
 ### 克隆项目
 ```shell
-git clone https://github.com/dnyz520/careyshop-admin.git
+git clone xxx(xxx替换成第三方git镜像地址)
 ```
 
 ### 安装依赖
@@ -108,7 +88,7 @@ npm run inspect
 之后将配置修改为您的环境，具体配置如下：
 ```js
 const serverConfig = {
-  BASE_API: '//careyshop.cn/api',                   // API 接口访问地址
+  BASE_API: '/api',                                 // API 接口访问地址
   APP_KEY: '86757125',                              // 后端获取的 App应用 钥匙
   APP_SECRET: 'ea1bd533d001fd73b09944f04c96a6fc'    // 后端获取的 App应用 密钥
 }
@@ -132,18 +112,14 @@ const serverConfig = {
 ![](https://aliyun.oss.careyshop.cn/poster/gray/%E5%94%AE%E5%90%8E%E5%88%97%E8%A1%A8-%E7%81%B0.png)
 ![](https://aliyun.oss.careyshop.cn/poster/gray/%E5%94%AE%E5%90%8E%E8%AF%A6%E6%83%85-%E7%81%B0.png)
 ![](https://aliyun.oss.careyshop.cn/poster/gray/%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86-%E7%81%B0.png)
+![](https://aliyun.oss.careyshop.cn/poster/gray/%E7%BC%A9%E7%95%A5%E5%9B%BE%E8%AE%BE%E8%AE%A1-%E7%81%B0.png)
 ![](https://aliyun.oss.careyshop.cn/poster/gray/%E8%B5%84%E6%BA%90%E9%80%89%E6%8B%A9-%E7%81%B0.png)
 ![](https://aliyun.oss.careyshop.cn/poster/gray/%E7%89%A9%E6%B5%81%E8%BD%A8%E8%BF%B9-%E7%81%B0.png)
-![](https://aliyun.oss.careyshop.cn/poster/gray/%E8%B5%84%E6%BA%90%E9%A2%84%E8%A7%88-%E7%81%B0.png)
 ![](https://aliyun.oss.careyshop.cn/poster/gray/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE-%E7%81%B0.png)
-![](https://aliyun.oss.careyshop.cn/poster/gray/%E7%BC%A9%E7%95%A5%E5%9B%BE%E8%AE%BE%E8%AE%A1-%E7%81%B0.png)
+![](https://aliyun.oss.careyshop.cn/poster/gray/%E8%B5%84%E6%BA%90%E9%A2%84%E8%A7%88-%E7%81%B0.png)
 
 #### 声明
-本程序使用 AGPLv3 开源协议，未遵守协议视为违约将承担法律责任，商用需进行授权，
-
-所包含的源码（包括第三方）和二进制文件存在版权信息另行标注（附加许可）的情况，
-
-CareyShop® 商标和著作权所有者为宁波互明科技有限公司。
+版权归宁波互明科技有限公司所有
 
 #### 鸣谢
 <a href="https://github.com/d2-projects/d2-admin" target="_blank"><img src="https://doc.careyshop.cn/assets/img/d2-admin@2x.png" width="200"></a>

@@ -50,7 +50,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'fuse.js',
       library: 'Fuse',
-      js: 'https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/fuse.js@6.5.3/dist/fuse.min.js',
       css: ''
     },
     {
@@ -104,7 +104,7 @@ if (process.env.VUE_APP_CDN === 'true') {
     {
       name: 'ua-parser-js',
       library: 'UAParser',
-      js: 'https://cdn.jsdelivr.net/npm/ua-parser-js@1.0.1/dist/ua-parser.min.js',
+      js: 'https://cdn.jsdelivr.net/npm/ua-parser-js@1.0.2/dist/ua-parser.min.js',
       css: ''
     },
     {
